@@ -1,0 +1,111 @@
+name: Github Action for CI&CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: [ 17 ]
+        java-distribution: [ 'corretto' ]
+
+    steps:
+      - name: Check Out The Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: ${{ matrix.java-distribution }}
+
+      - name: Get the version
+        id: get_version
+        run: |
+          RELEASE_VERSION_WITHOUT_V="$(cut -d'v' -f2 <<< ${GITHUB_REF#refs/*/})"
+          echo ::set-output name=VERSION::$RELEASE_VERSION_WITHOUT_V
+
+      - name: Gradle Caching
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+
+      - name: Update dockerfile
+        run: |
+          cat dockerfile > dockerfile.temp
+          
+          echo "ENV DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> dockerfile.temp
+          echo "ENV DOCKERHUB_NAME=${{ secrets.DOCKERHUB_NAME }}" >> dockerfile.temp
+          echo "ENV DOCKERHUB_PORT=${{ secrets.DOCKERHUB_PORT }}" >> dockerfile.temp
+          echo "ENV MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> dockerfile.temp
+          echo "ENV MYSQL_PORT=${{ secrets.MYSQL_PORT }}" >> dockerfile.temp
+          echo "ENV MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> dockerfile.temp
+          echo "ENV MYSQL_USER=${{ secrets.MYSQL_USER }}" >> dockerfile.temp
+          echo "ENV MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> dockerfile.temp
+          echo "ENV SPRING_PROFILES_ACTIVE=${{ secrets.SPRING_PROFILES_ACTIVE }}" >> dockerfile.temp
+          
+          mv dockerfile.temp dockerfile
+
+        working-directory: ./api
+
+      - name: Execute Gradle build
+        run: ./gradlew :api:build --no-daemon
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: ./api
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}:latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: ./api
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}:${{ github.sha }}
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+      - name: Application Run
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            sudo docker stop ${{ secrets.DOCKERHUB_NAME }}
+            
+            sudo docker rm -f ${{ secrets.DOCKERHUB_NAME }}
+            
+            sudo docker image prune -a -f
+            
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}:latest
+            
+            sudo docker run -p ${{ secrets.DOCKERHUB_PORT }}:8080 \
+              --name ${{ secrets.DOCKERHUB_NAME }} \
+              -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}

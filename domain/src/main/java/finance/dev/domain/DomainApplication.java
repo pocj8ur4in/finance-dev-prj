@@ -14,6 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DomainApplication {
     @MethodInfo(name = "main", description = "Domain 모듈을 실행합니다.")
     public static void main(String[] args) {
-        SpringApplication.run(DomainApplication.class, args);
+        String activeProfile = System.getenv("SPRING_PROFILES_ACTIVE");
+        SpringApplication springApplication = new SpringApplication(DomainApplication.class);
+        springApplication.setAdditionalProfiles(activeProfile);
+        springApplication.run(args);
     }
 }

@@ -1,0 +1,14 @@
+
+---
+# 개발 (dev) 프로파일
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+# 운영 (prod) 프로파일
+spring:
+  config:
+    activate:
+      on-profile: prod

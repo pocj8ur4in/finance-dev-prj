@@ -11,9 +11,11 @@ import java.time.ZoneId;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @TypeInfo(name = "EmbeddedMysqlConfig", description = "임베디드 MySQL 설정 클래스")
 @Configuration
+@Profile("dev")
 public class EmbeddedMysqlConfig {
     public EmbeddedMysqlConfig() {
         // 임배디드 MySQL 설정
