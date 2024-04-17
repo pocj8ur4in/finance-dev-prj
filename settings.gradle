@@ -1,1 +1,5 @@
 rootProject.name = 'finance-dev-prj'
+
+include 'api'
+include 'common'
+include 'domain'
