@@ -6,11 +6,13 @@ import com.wix.mysql.EmbeddedMysql;
 import com.wix.mysql.ScriptResolver;
 import com.wix.mysql.config.MysqldConfig;
 import com.wix.mysql.distribution.Version;
+import finance.dev.common.annotation.TypeInfo;
 import java.time.ZoneId;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import org.springframework.context.annotation.Configuration;
 
+@TypeInfo(name = "EmbeddedMysqlConfig", description = "임베디드 MySQL 설정 클래스")
 @Configuration
 public class EmbeddedMysqlConfig {
     public EmbeddedMysqlConfig() {
@@ -48,9 +50,8 @@ public class EmbeddedMysqlConfig {
                         + System.getenv("MYSQL_PORT")
                         + "/"
                         + System.getenv("MYSQL_DATABASE")
-                        + "?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true"); // MySQL
-        // URL
-        // 설정
+                        + "?serverTimezone=UTC&useSSL=false"
+                        + "&allowPublicKeyRetrieval=true"); // MySQL URL 설정
         System.setProperty(
                 "spring.datasource.username", System.getenv("MYSQL_USER")); // MySQL 사용자 설정
         System.setProperty(

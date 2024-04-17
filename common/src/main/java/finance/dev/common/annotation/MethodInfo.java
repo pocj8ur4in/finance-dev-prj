@@ -4,6 +4,7 @@ import java.lang.annotation.*;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
 
+@TypeInfo(name = "MethodInfo", description = "메소드 정보를 제공하는 어노테이션 인터페이스")
 @Target({ElementType.METHOD}) // 어노테이션을 사용할 수 있는 대상을 메소드로 지정
 @Retention(RetentionPolicy.RUNTIME) // 어노테이션 정보를 런타임 시간까지 유지하도록 설정
 @Documented // 해당 어노테이션을 javadoc에 포함시킴

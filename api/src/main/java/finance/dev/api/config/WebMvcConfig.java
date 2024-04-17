@@ -1,11 +1,15 @@
 package finance.dev.api.config;
 
+import finance.dev.common.annotation.MethodInfo;
+import finance.dev.common.annotation.TypeInfo;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@TypeInfo(name = "WebMvcConfig", description = "웹 어플리케이션 정적 리소스 관리 클래스")
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer { // 웹 어플리케이션에서 정적 리소스 관리
+    @MethodInfo(name = "addResourceHandlers", description = "정적 리소스의 요청 경로와 실제 파일 시스템 경로를 매핑합니다.")
     @Override
     public void addResourceHandlers(
             ResourceHandlerRegistry resourceHandlerRegistry) { // 정적 리소스의 요청 경로와 실제 파일 시스템 경로 매핑
