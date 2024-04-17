@@ -35,6 +35,7 @@ subprojects {
 
     dependencies {
         implementation group: 'org.springframework.boot', name: 'spring-boot-starter', version: '3.2.4'
+        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '3.2.4'
         implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.2.4'
         testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '3.2.4'
         compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
