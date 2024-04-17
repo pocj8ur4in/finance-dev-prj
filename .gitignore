@@ -427,3 +427,6 @@ next-env.d.ts
 
 # 도커 컨테이너 불륨 디렉토리 제외
 docker
+
+### Embedded MySQL ###
+/target
