@@ -1,0 +1,24 @@
+spotless {
+    // spotless 플러그인의 버전 설정
+    version = "6.25.0"
+
+    // Java 소스 파일(**/*.java)에 대한 포맷팅과 스타일을 지정
+    java {
+        target("**/*.java")
+
+        // import문의 순서 정렬
+        importOrder()
+
+        // 사용되지 않는 import문 제거
+        removeUnusedImports()
+
+        // Google Java 스타일 가이드에 따른 코드 포맷팅
+        googleJavaFormat().aosp()
+
+        // 라인 끝의 공백 제거
+        trimTrailingWhitespace()
+
+        // 파일의 맨 마지막에 빈 줄 추가
+        endWithNewline()
+    }
+}

@@ -15,6 +15,7 @@ public class WebMvcConfig implements WebMvcConfigurer { // 웹 어플리케이�
 
         resourceHandlerRegistry
                 .addResourceHandler("/templates/**") // "/templates/" 경로에 대한 요청을 처리
-                .addResourceLocations("classpath:/templates/"); // 클래스패스의 "/templates/" 디렉토리에 있는 템플릿 제공
+                .addResourceLocations(
+                        "classpath:/templates/"); // 클래스패스의 "/templates/" 디렉토리에 있는 템플릿 제공
     }
 }
