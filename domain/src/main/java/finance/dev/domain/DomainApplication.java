@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(
 		scanBasePackages = {
-				"finance.dev.domain"
+				"finance.dev.domain",
+				"finance.dev.common",
 		}
 )
 public class DomainApplication {

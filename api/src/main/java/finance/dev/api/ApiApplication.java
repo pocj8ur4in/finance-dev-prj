@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(
         scanBasePackages = {
         "finance.dev.api",
-        "finance.dev.domain"
+        "finance.dev.common",
+        "finance.dev.domain",
         })
 public class ApiApplication {
 
