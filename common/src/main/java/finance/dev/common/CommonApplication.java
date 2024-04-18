@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @TypeInfo(name = "CommonApplication", description = "Common 모듈 메인 클래스")
 @SpringBootApplication(
-        scanBasePackages = {"finance.dev.common",})
+        scanBasePackages = {
+            "finance.dev.common",
+        })
 public class CommonApplication {
     @MethodInfo(name = "main", description = "Common 모듈을 실행합니다.")
     public static void main(String[] args) {

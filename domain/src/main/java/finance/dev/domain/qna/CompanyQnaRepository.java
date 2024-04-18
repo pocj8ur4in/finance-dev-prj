@@ -1,7 +1,6 @@
 package finance.dev.domain.qna;
 
 import finance.dev.common.annotation.TypeInfo;
-import finance.dev.domain.product.CompanyProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 

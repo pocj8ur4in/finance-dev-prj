@@ -1,7 +1,6 @@
 package finance.dev.domain.one2one;
 
 import finance.dev.common.annotation.TypeInfo;
-import finance.dev.domain.notice.CompanyNoticeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
