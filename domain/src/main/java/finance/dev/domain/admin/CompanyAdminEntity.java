@@ -14,7 +14,7 @@ public class CompanyAdminEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_idx")
-    private Long memberIdx;
+    private int memberIdx;
 
     @Column(name = "member_id", unique = true, nullable = false)
     private String memberId;
@@ -28,11 +28,8 @@ public class CompanyAdminEntity {
     @Column(name = "member_email", unique = true, nullable = false)
     private String memberEmail;
 
-    @Column(
-            name = "member_join_date",
-            nullable = false,
-            columnDefinition = "DATE DEFAULT CURRENT_DATE")
-    private Date memberJoinDate;
+    @Column(name = "member_join_date", nullable = false)
+    private Date member_joinDate;
 
     @Builder
     public CompanyAdminEntity(

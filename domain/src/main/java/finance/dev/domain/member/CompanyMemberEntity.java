@@ -2,7 +2,7 @@ package finance.dev.domain.member;
 
 import finance.dev.common.annotation.TypeInfo;
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.*;
 
 @TypeInfo(name = "CompanyMemberEntity", description = "회사 회원 엔티티 클래스")
@@ -14,7 +14,7 @@ public class CompanyMemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_idx")
-    private Long memberIdx;
+    private int memberIdx;
 
     @Column(name = "member_id", unique = true, nullable = false)
     private String memberId;
@@ -41,13 +41,10 @@ public class CompanyMemberEntity {
     private String memberGender;
 
     @Column(name = "member_birth_date", nullable = false)
-    private Date memberBirthDate;
+    private String memberBirthDate;
 
-    @Column(
-            name = "member_join_date",
-            nullable = false,
-            columnDefinition = "DATE DEFAULT CURRENT_DATE")
-    private Date memberJoinDate;
+    @Column(name = "member_join_date", nullable = false)
+    private LocalDateTime memberJoinDate;
 
     @Builder
     public CompanyMemberEntity(
@@ -59,7 +56,8 @@ public class CompanyMemberEntity {
             int memberPwQuestion,
             String memberPwAnswer,
             String memberGender,
-            Date memberBirthDate) {
+            LocalDateTime memberJoinDate,
+            String memberBirthDate) {
         this.memberId = memberId;
         this.memberPw = memberPw;
         this.memberName = memberName;
@@ -68,6 +66,7 @@ public class CompanyMemberEntity {
         this.memberPwQuestion = memberPwQuestion;
         this.memberPwAnswer = memberPwAnswer;
         this.memberGender = memberGender;
+        this.memberJoinDate = memberJoinDate;
         this.memberBirthDate = memberBirthDate;
     }
 }

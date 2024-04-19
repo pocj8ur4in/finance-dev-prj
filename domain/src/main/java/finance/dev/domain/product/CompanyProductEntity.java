@@ -2,7 +2,7 @@ package finance.dev.domain.product;
 
 import finance.dev.common.annotation.TypeInfo;
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.*;
 
 @TypeInfo(name = "CompanyProductEntity", description = "회사 제품 엔티티 클래스")
@@ -14,7 +14,7 @@ public class CompanyProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_idx")
-    private Long productIdx;
+    private int productIdx;
 
     @Column(name = "product_name", nullable = false)
     private String productName;
@@ -28,15 +28,20 @@ public class CompanyProductEntity {
     @Column(name = "product_reg_name", nullable = false)
     private String productRegName;
 
-    @Column(name = "product_date", nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
-    private Date productDate;
+    @Column(name = "product_date", nullable = false)
+    private LocalDateTime productDate;
 
     @Builder
     public CompanyProductEntity(
-            String productName, String productContent, String productImg, String productRegName) {
+            String productName,
+            String productContent,
+            String productImg,
+            String productRegName,
+            LocalDateTime productDate) {
         this.productName = productName;
         this.productContent = productContent;
         this.productImg = productImg;
         this.productRegName = productRegName;
+        this.productDate = productDate;
     }
 }

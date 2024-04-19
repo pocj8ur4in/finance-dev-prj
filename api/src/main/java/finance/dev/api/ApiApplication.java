@@ -16,6 +16,8 @@ public class ApiApplication {
 
     @MethodInfo(name = "main", description = "API 모듈을 실행합니다.")
     public static void main(String[] args) {
+        System.setProperty(
+                "spring.config.name", "application-api, application-common, application-domain");
         String activeProfile = System.getenv("SPRING_PROFILES_ACTIVE");
         SpringApplication springApplication = new SpringApplication(ApiApplication.class);
         springApplication.setAdditionalProfiles(activeProfile);

@@ -15,13 +15,20 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler
     public ResponseEntity<ExceptionResponse> handleException(Exception exception) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ExceptionResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, "서버에서 알 수 없는 예외가 발생했습니다.", exception));
+                .body(
+                        ExceptionResponse.of(
+                                HttpStatus.INTERNAL_SERVER_ERROR,
+                                "서버에서 알 수 없는 예외가 발생했습니다.",
+                                exception));
     }
 
     @MethodInfo(name = "handleBadRequestException", description = "클라이언트에서 발생하는 잘못된 요청 예외를 처리합니다.")
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ExceptionResponse> handleBadRequestException(BadRequestException badRequestException) {
+    public ResponseEntity<ExceptionResponse> handleBadRequestException(
+            BadRequestException badRequestException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ExceptionResponse.of(HttpStatus.BAD_REQUEST, "잘못된 요청이 전달되었습니다.", badRequestException));
+                .body(
+                        ExceptionResponse.of(
+                                HttpStatus.BAD_REQUEST, "잘못된 요청이 전달되었습니다.", badRequestException));
     }
 }
