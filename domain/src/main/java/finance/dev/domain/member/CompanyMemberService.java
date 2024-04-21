@@ -17,6 +17,52 @@ import org.springframework.stereotype.Service;
 public class CompanyMemberService {
     private final CompanyMemberRepository companyMemberRepository;
 
+    @MethodInfo(name = "searchByAdmin", description = "관리자가 회사 회원을 검색합니다.")
+    public ArrayList<CompanyMemberEntity> searchByAdmin(
+            AdminUserType searchType,
+            String searchContent,
+            int searchPageNum,
+            AdminPageSize pageSize,
+            AdminSort searchSort) {
+
+        Pageable pageable =
+                PageRequest.of(
+                        searchPageNum,
+                        pageSize == AdminPageSize.SIZE_5
+                                ? 5
+                                : pageSize == AdminPageSize.SIZE_10 ? 10 : 20,
+                        searchSort == AdminSort.ID_ASC
+                                ? Sort.by("memberId").ascending()
+                                : searchSort == AdminSort.ID_DESC
+                                        ? Sort.by("memberId").descending()
+                                        : searchSort == AdminSort.JOIN_DATE_ASC
+                                                ? Sort.by("memberJoinDate").ascending()
+                                                : Sort.by("memberJoinDate").descending());
+
+        if (searchType == AdminUserType.ID) {
+            return new ArrayList<>(
+                    companyMemberRepository
+                            .findAllByMemberIdContaining(searchContent, pageable)
+                            .getContent());
+        } else if (searchType == AdminUserType.NAME) {
+            return new ArrayList<>(
+                    companyMemberRepository
+                            .findAllByMemberNameContaining(searchContent, pageable)
+                            .getContent());
+        } else if (searchType == AdminUserType.EMAIL) {
+            return new ArrayList<>(
+                    companyMemberRepository
+                            .findAllByMemberEmailContaining(searchContent, pageable)
+                            .getContent());
+        } else {
+            return new ArrayList<>(
+                    companyMemberRepository
+                            .findAllByMemberIdContainingOrMemberNameContainingOrMemberEmailContaining(
+                                    searchContent, searchContent, searchContent, pageable)
+                            .getContent());
+        }
+    }
+
 
     @Builder
     public CompanyMemberService(CompanyMemberRepository companyMemberRepository) {

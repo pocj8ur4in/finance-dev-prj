@@ -44,6 +44,28 @@ public class AdminRestController {
         return adminUseCase.login(adminLoginRequest);
     }
 
+    @MethodInfo(name = "adminUsers", description = "관리자 회원 목록을 조회합니다.")
+    @GetMapping("/users")
+    @Operation(
+            summary = "관리자 회원 목록 조회",
+            description = "관리자 회원 목록을 조회합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "관리자 회원 목록 조회 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(implementation = AdminUserResponse.class))),
+                @ApiResponse(responseCode = "400", description = "관리자 회원 목록 조회 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<ArrayList<AdminUserResponse>> adminUsers(
+            @RequestBody AdminUsersRequest adminUsersRequest) throws Exception {
+        return adminUseCase.findUsers(adminUsersRequest);
+    }
+
     public AdminRestController(AdminUseCase adminUseCase) {
         this.adminUseCase = adminUseCase;
     }

@@ -1,3 +1,4 @@
+package finance.dev.api.controller.admin;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -73,6 +74,65 @@ public class AdminUseCase {
             throw new BadRequestException(e.getMessage());
         } catch (Exception e) {
             throw new Exception("로그인에 실패했습니다.");
+        }
+    }
+
+    @MethodInfo(name = "findUsers", description = "회원 목록을 가져옵니다.")
+    public ResponseEntity<ArrayList<AdminUserResponse>> findUsers(
+            AdminUsersRequest adminUsersRequest) throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (adminUsersRequest.getAccessToken() == null) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(adminUsersRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (companyAdminService.checkId(memberId)) {
+                throw new BadRequestException("아이디가 존재하지 않습니다.");
+            }
+
+            // 회원 목록을 가져옴
+            ArrayList<AdminUserResponse> adminUserResponses = new ArrayList<>();
+
+            for (CompanyMemberEntity companyMemberEntity :
+                    companyMemberService.searchByAdmin(
+                            adminUsersRequest.getSearchType(),
+                            adminUsersRequest.getSearchContent(),
+                            adminUsersRequest.getSearchPageNum(),
+                            adminUsersRequest.getSearchPageSize(),
+                            adminUsersRequest.getSearchSort())) {
+                adminUserResponses.add(
+                        AdminUserResponse.builder()
+                                .memberId(companyMemberEntity.getMemberId())
+                                .memberName(companyMemberEntity.getMemberName())
+                                .memberEmail(companyMemberEntity.getMemberEmail())
+                                .memberBirthDate(companyMemberEntity.getMemberBirthDate())
+                                .memberJoinDate(
+                                        companyMemberEntity
+                                                .getMemberJoinDate()
+                                                .format(
+                                                        java.time.format.DateTimeFormatter
+                                                                .ofPattern("yyyy-MM-dd")))
+                                .build());
+            }
+
+            return ResponseEntity.ok(adminUserResponses);
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("회원 목록을 불러오는데 실패했습니다.");
         }
     }
 
