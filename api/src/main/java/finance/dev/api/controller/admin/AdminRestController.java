@@ -89,6 +89,30 @@ public class AdminRestController {
         return adminUseCase.findUsersNumber();
     }
 
+    @MethodInfo(name = "adminNotices", description = "관리자 공지사항 목록을 조회합니다.")
+    @GetMapping("/notices")
+    @Operation(
+            summary = "관리자 공지사항 목록 조회",
+            description = "관리자 공지사항 목록을 조회합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "관리자 공지사항 목록 조회 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(
+                                                        implementation =
+                                                                AdminNoticeResponse.class))),
+                @ApiResponse(responseCode = "400", description = "관리자 공지사항 목록 조회 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<ArrayList<AdminNoticeResponse>> adminNotices(
+            @RequestBody AdminNoticesRequest adminNoticesRequest) throws Exception {
+        return adminUseCase.findNotices(adminNoticesRequest);
+    }
+
     public AdminRestController(AdminUseCase adminUseCase) {
         this.adminUseCase = adminUseCase;
     }

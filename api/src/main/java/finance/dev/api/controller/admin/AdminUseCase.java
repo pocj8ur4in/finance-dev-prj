@@ -149,6 +149,64 @@ public class AdminUseCase {
         }
     }
 
+    @MethodInfo(name = "findNotices", description = "공지사항 목록을 가져옵니다.")
+    public ResponseEntity<ArrayList<AdminNoticeResponse>> findNotices(
+            AdminNoticesRequest adminNoticesRequest) throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (adminNoticesRequest.getAccessToken() == null) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(adminNoticesRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (companyAdminService.checkId(memberId)) {
+                throw new BadRequestException("아이디가 존재하지 않습니다.");
+            }
+
+            // 공지사항 목록을 가져옴
+            ArrayList<AdminNoticeResponse> adminNoticeResponses = new ArrayList<>();
+
+            for (CompanyNoticeEntity companyNoticeEntity :
+                    companyNoticeService.searchByAdmin(
+                            adminNoticesRequest.getSearchType(),
+                            adminNoticesRequest.getSearchContent(),
+                            adminNoticesRequest.getSearchPageSize(),
+                            adminNoticesRequest.getSearchSort(),
+                            adminNoticesRequest.getSearchPageNumber())) {
+                adminNoticeResponses.add(
+                        AdminNoticeResponse.builder()
+                                .noticeId(companyNoticeEntity.getNoticeIdx())
+                                .noticeTitle(companyNoticeEntity.getNoticeTitle())
+                                .noticeContent(companyNoticeEntity.getNoticeContent())
+                                .noticeMemberId(companyNoticeEntity.getNoticeMemberId())
+                                .noticeDate(
+                                        companyNoticeEntity
+                                                .getNoticeDate()
+                                                .format(
+                                                        java.time.format.DateTimeFormatter
+                                                                .ofPattern("yyyy-MM-dd")))
+                                .build());
+            }
+
+            return ResponseEntity.ok(adminNoticeResponses);
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("공지사항 목록을 불러오는데 실패했습니다.");
+        }
+    }
 
     @Builder
     public AdminUseCase(
