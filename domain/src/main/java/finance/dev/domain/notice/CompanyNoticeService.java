@@ -63,6 +63,10 @@ public class CompanyNoticeService {
         return new ArrayList<>(
                 entityManager.createNativeQuery(query, CompanyNoticeEntity.class).getResultList());
     }
+    @MethodInfo(name = "count", description = "공지사항의 개수를 조회합니다.")
+    public long count() {
+        return companyNoticeRepository.count();
+    }
     @Builder
     public CompanyNoticeService(
             CompanyNoticeRepository companyNoticeRepository, EntityManager entityManager) {

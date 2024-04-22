@@ -113,6 +113,28 @@ public class AdminRestController {
         return adminUseCase.findNotices(adminNoticesRequest);
     }
 
+    @MethodInfo(name = "adminNoticesNumber", description = "관리자 공지사항 개수를 조회합니다.")
+    @GetMapping("/notices/number")
+    @Operation(
+            summary = "관리자 공지사항 개수 조회",
+            description = "관리자 공지사항 개수를 조회합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "관리자 공지사항 개수 조회 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(
+                                                        implementation =
+                                                                AdminNoticeNumberResponse.class))),
+                @ApiResponse(responseCode = "400", description = "관리자 공지사항 개수 조회 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<AdminNoticeNumberResponse> adminNoticesNumber() throws Exception {
+        return adminUseCase.findNoticesNumber();
+    }
     public AdminRestController(AdminUseCase adminUseCase) {
         this.adminUseCase = adminUseCase;
     }

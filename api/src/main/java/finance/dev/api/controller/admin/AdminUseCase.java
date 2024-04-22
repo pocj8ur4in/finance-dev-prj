@@ -149,6 +149,19 @@ public class AdminUseCase {
         }
     }
 
+    @MethodInfo(name = "findNoticesNumber", description = "공지사항 수를 가져옵니다.")
+    public ResponseEntity<AdminNoticeNumberResponse> findNoticesNumber() throws Exception {
+        try {
+            // 공지사항 수를 가져옴
+            return ResponseEntity.ok(
+                    AdminNoticeNumberResponse.builder()
+                            .noticeNumber((int) companyNoticeService.count())
+                            .build());
+        } catch (Exception e) {
+            throw new Exception("공지사항 수를 불러오는데 실패했습니다.");
+        }
+    }
+
     @MethodInfo(name = "findNotices", description = "공지사항 목록을 가져옵니다.")
     public ResponseEntity<ArrayList<AdminNoticeResponse>> findNotices(
             AdminNoticesRequest adminNoticesRequest) throws Exception {
