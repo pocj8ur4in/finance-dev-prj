@@ -63,6 +63,11 @@ public class CompanyMemberService {
         }
     }
 
+    @MethodInfo(name = "checkId", description = "회원 아이디 중복 체크를 합니다.")
+    public boolean checkId(String memberId) {
+        return companyMemberRepository.existsByMemberId(memberId);
+    }
+
     @MethodInfo(name = "count", description = "회원 수를 반환합니다.")
     public long count() {
         return companyMemberRepository.count();

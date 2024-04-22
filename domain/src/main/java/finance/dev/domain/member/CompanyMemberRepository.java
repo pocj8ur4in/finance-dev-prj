@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @TypeInfo(name = "CompanyMemberRepository", description = "회사 회원 레포지토리 인터페이스")
 @EnableJpaRepositories
 public interface CompanyMemberRepository extends JpaRepository<CompanyMemberEntity, Long> {
+    boolean existsByMemberId(String memberId);
     Page<CompanyMemberEntity> findAllByMemberIdContaining(String memberId, Pageable pageable);
 
     Page<CompanyMemberEntity> findAllByMemberNameContaining(String memberName, Pageable pageable);
