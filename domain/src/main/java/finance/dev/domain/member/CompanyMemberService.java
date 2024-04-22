@@ -63,6 +63,10 @@ public class CompanyMemberService {
         }
     }
 
+    @MethodInfo(name = "count", description = "회원 수를 반환합니다.")
+    public long count() {
+        return companyMemberRepository.count();
+    }
 
     @Builder
     public CompanyMemberService(CompanyMemberRepository companyMemberRepository) {

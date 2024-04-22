@@ -136,6 +136,19 @@ public class AdminUseCase {
         }
     }
 
+    @MethodInfo(name = "findUsersNumber", description = "회원 수를 가져옵니다.")
+    public ResponseEntity<AdminUserNumberResponse> findUsersNumber() throws Exception {
+        try {
+            // 회원 수를 가져옴
+            return ResponseEntity.ok(
+                    AdminUserNumberResponse.builder()
+                            .memberNumber((int) companyMemberService.count())
+                            .build());
+        } catch (Exception e) {
+            throw new Exception("회원 수를 불러오는데 실패했습니다.");
+        }
+    }
+
 
     @Builder
     public AdminUseCase(
