@@ -191,6 +191,40 @@ public class MemberUseCase {
         }
     }
 
+    @MethodInfo(name = "findId", description = "아이디 찾기를 합니다.")
+    public ResponseEntity<MemberFindIdResponse> findId(MemberFindIdRequest memberFindIdRequest)
+            throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberFindIdRequest.getMemberName().isEmpty()
+                    || memberFindIdRequest.getMemberEmail().isEmpty()) {
+                throw new BadRequestException("이름과 이메일을 입력해주세요.");
+            }
+
+            // 아이디 찾기
+            CompanyMemberEntity companyMemberEntity =
+                    companyMemberService.findByMemberNameAndMemberEmail(
+                            memberFindIdRequest.getMemberName(),
+                            memberFindIdRequest.getMemberEmail());
+
+            // 아이디 찾기 검사
+            if (companyMemberEntity == null) {
+                throw new BadRequestException("일치하는 아이디가 없습니다.");
+            }
+
+            // 아이디 찾기 성공
+            return ResponseEntity.ok(
+                    MemberFindIdResponse.builder()
+                            .memberId(companyMemberEntity.getMemberId())
+                            .build());
+
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("아이디 찾기에 실패했습니다.");
+        }
+    }
+
 
     @Builder
     public MemberUseCase(

@@ -83,6 +83,12 @@ public class CompanyMemberService {
         return companyMemberRepository.count();
     }
 
+    @MethodInfo(name = "findByMemberNameAndMemberEmail", description = "회원 이름과 이메일로 회원을 찾습니다.")
+    public CompanyMemberEntity findByMemberNameAndMemberEmail(
+            String memberName, String memberEmail) {
+        return companyMemberRepository.findByMemberNameAndMemberEmail(memberName, memberEmail);
+    }
+
     @Builder
     public CompanyMemberService(CompanyMemberRepository companyMemberRepository) {
         this.companyMemberRepository = companyMemberRepository;
