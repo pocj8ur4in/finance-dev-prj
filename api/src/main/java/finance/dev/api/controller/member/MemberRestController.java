@@ -52,6 +52,78 @@ public class MemberRestController {
         return memberUseCase.join(memberJoinRequest);
     }
 
+    @MethodInfo(name = "memberLogin", description = "회원 로그인를 합니다.")
+    @GetMapping("/login")
+    @Operation(
+            summary = "회원 로그인",
+            description = "회원 로그인을 합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "회원 로그인 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(
+                                                        implementation =
+                                                                MemberLoginResponse.class))),
+                @ApiResponse(responseCode = "400", description = "회원 로그인 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<MemberLoginResponse> memberLogin(
+            @RequestBody MemberLoginRequest memberLoginRequest) throws Exception {
+        return memberUseCase.login(memberLoginRequest);
+    }
+
+    @MethodInfo(name = "memberLogout", description = "회원 아이디 찾기를 합니다.")
+    @GetMapping("/id")
+    @Operation(
+            summary = "회원 아이디 찾기",
+            description = "회원 아이디 찾기를 합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "회원 아이디 찾기 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(
+                                                        implementation =
+                                                                MemberFindIdResponse.class))),
+                @ApiResponse(responseCode = "400", description = "회원 아이디 찾기 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<MemberFindIdResponse> memberFindId(
+            @RequestBody MemberFindIdRequest memberFindIdRequest) throws Exception {
+        return memberUseCase.findId(memberFindIdRequest);
+    }
+
+    @MethodInfo(name = "memberPw", description = "회원 비밀번호 찾기를 합니다.")
+    @GetMapping("/pw")
+    @Operation(
+            summary = "회원 비밀번호 찾기",
+            description = "회원 비밀번호 찾기를 합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "회원 비밀번호 찾기 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(
+                                                        implementation =
+                                                                MemberFindPwResponse.class))),
+                @ApiResponse(responseCode = "400", description = "회원 비밀번호 찾기 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<MemberFindPwResponse> memberFindPw(
+            @RequestBody MemberFindPwRequest memberFindPwRequest) throws Exception {
+        return memberUseCase.findPw(memberFindPwRequest);
+    }
+
 
     public MemberRestController(MemberUseCase memberUseCase) {
         this.memberUseCase = memberUseCase;

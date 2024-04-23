@@ -73,6 +73,11 @@ public class CompanyMemberService {
         companyMemberRepository.save(companyMemberEntity);
     }
 
+    @MethodInfo(name = "login", description = "회원 로그인을 합니다.")
+    public CompanyMemberEntity login(String memberId) {
+        return companyMemberRepository.findByMemberId(memberId);
+    }
+
     @MethodInfo(name = "count", description = "회원 수를 반환합니다.")
     public long count() {
         return companyMemberRepository.count();

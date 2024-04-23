@@ -141,6 +141,56 @@ public class MemberUseCase {
         }
     }
 
+    @MethodInfo(name = "login", description = "로그인을 합니다.")
+    public ResponseEntity<MemberLoginResponse> login(MemberLoginRequest memberLoginRequest)
+            throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberLoginRequest.getMemberId().isEmpty()
+                    || memberLoginRequest.getMemberPw().isEmpty()) {
+                throw new BadRequestException("아이디 또는 비밀번호를 입력해주세요.");
+            }
+
+            // 로그인
+            CompanyMemberEntity companyMemberEntity =
+                    companyMemberService.login(memberLoginRequest.getMemberId());
+
+            // 로그인 검사
+            if (companyMemberEntity == null) {
+                throw new BadRequestException("일치하는 아이디가 없습니다.");
+            }
+
+            if (!companyMemberEntity.getMemberPw().equals(memberLoginRequest.getMemberPw())) {
+                throw new BadRequestException("비밀번호가 일치하지 않습니다.");
+            }
+
+            // 로그인 성공 시 토큰 발행
+            return ResponseEntity.ok(
+                    MemberLoginResponse.builder()
+                            .accessToken(
+                                    JWT.create()
+                                            .withSubject(companyMemberEntity.getMemberId())
+                                            .withExpiresAt(
+                                                    new Date(
+                                                            System.currentTimeMillis()
+                                                                    + 1000 * 60 * 60 * 24))
+                                            .sign(Algorithm.HMAC512(System.getenv("JWT_SECRET"))))
+                            .refreshToken(
+                                    JWT.create()
+                                            .withSubject(companyMemberEntity.getMemberId())
+                                            .withExpiresAt(
+                                                    new Date(
+                                                            System.currentTimeMillis()
+                                                                    + 1000 * 60 * 60 * 24 * 7))
+                                            .sign(Algorithm.HMAC512(System.getenv("JWT_SECRET"))))
+                            .build());
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("로그인에 실패했습니다.");
+        }
+    }
+
 
     @Builder
     public MemberUseCase(
