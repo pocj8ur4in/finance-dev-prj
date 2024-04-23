@@ -36,6 +36,22 @@ public class MemberRestController {
         return memberUseCase.checkId(memberCheckIdRequest);
     }
 
+    @MethodInfo(name = "memberJoin", description = "회원 가입을 합니다.")
+    @GetMapping("/join")
+    @Operation(
+            summary = "회원 가입",
+            description = "회원 가입을 합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(responseCode = "200", description = "회원 가입 성공"),
+                @ApiResponse(responseCode = "400", description = "회원 가입 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<Void> memberJoin(@RequestBody MemberJoinRequest memberJoinRequest)
+            throws Exception {
+        return memberUseCase.join(memberJoinRequest);
+    }
+
 
     public MemberRestController(MemberUseCase memberUseCase) {
         this.memberUseCase = memberUseCase;

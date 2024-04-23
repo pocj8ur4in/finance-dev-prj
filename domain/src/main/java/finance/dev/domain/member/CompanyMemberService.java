@@ -68,6 +68,11 @@ public class CompanyMemberService {
         return companyMemberRepository.existsByMemberId(memberId);
     }
 
+    @MethodInfo(name = "join", description = "회원 가입을 합니다.")
+    public void join(CompanyMemberEntity companyMemberEntity) {
+        companyMemberRepository.save(companyMemberEntity);
+    }
+
     @MethodInfo(name = "count", description = "회원 수를 반환합니다.")
     public long count() {
         return companyMemberRepository.count();

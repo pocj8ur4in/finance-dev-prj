@@ -1,3 +1,7 @@
+package finance.dev.api.controller.member;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import finance.dev.api.controller.member.dto.*;
 import finance.dev.common.annotation.MethodInfo;
 import finance.dev.common.annotation.TypeInfo;
@@ -57,6 +61,83 @@ public class MemberUseCase {
             throw new BadRequestException(e.getMessage());
         } catch (Exception e) {
             throw new Exception("아이디 중복 체크에 실패했습니다.");
+        }
+    }
+
+    @MethodInfo(name = "join", description = "회원가입을 합니다.")
+    public ResponseEntity<Void> join(MemberJoinRequest memberJoinRequest) throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberJoinRequest.getMemberId().isEmpty()
+                    || memberJoinRequest.getMemberPw().isEmpty()
+                    || memberJoinRequest.getMemberPwConfirm().isEmpty()) {
+                throw new BadRequestException("모든 항목을 입력해주세요.");
+            }
+
+            // 아이디 4~16자
+            if (memberJoinRequest.getMemberId().length() < 4
+                    || memberJoinRequest.getMemberId().length() > 16) {
+                throw new BadRequestException("아이디는 4~16자로 입력해주세요.");
+            }
+
+            // 아이디 영어 소문자, 숫자만 가능
+            if (!memberJoinRequest.getMemberId().matches("^[a-z0-9]*$")) {
+                throw new BadRequestException("아이디는 영어 소문자, 숫자만 입력해주세요.");
+            }
+
+            // 아이디 중복 체크
+            if (companyMemberService.checkId(memberJoinRequest.getMemberId())) {
+                throw new BadRequestException("이미 사용중인 아이디입니다.");
+            }
+
+            // 비밀번호 8~16자
+            if (memberJoinRequest.getMemberPw().length() < 8
+                    || memberJoinRequest.getMemberPw().length() > 16) {
+                throw new BadRequestException("비밀번호는 8~16자로 입력해주세요.");
+            }
+
+            // 비밀번호 영어, 특수문자, 숫자만 가능
+            if (!memberJoinRequest.getMemberPw().matches("^[a-zA-Z0-9!@#$%^&*]*$")) {
+                throw new BadRequestException("비밀번호는 영어, 특수문자, 숫자만 입력해주세요.");
+            }
+
+            // 비밀번호 첫글자는 영어
+            if (!Character.isLetter(memberJoinRequest.getMemberPw().charAt(0))) {
+                throw new BadRequestException("비밀번호 첫글자는 영어로 입력해주세요.");
+            }
+
+            // 비밀번호와 비밀번호 확인 일치
+            if (!memberJoinRequest.getMemberPw().equals(memberJoinRequest.getMemberPwConfirm())) {
+                throw new BadRequestException("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            }
+
+            // 회원가입
+            companyMemberService.join(
+                    CompanyMemberEntity.builder()
+                            .memberId(memberJoinRequest.getMemberId())
+                            .memberPw(memberJoinRequest.getMemberPw())
+                            .memberEmail(memberJoinRequest.getMemberEmail())
+                            .memberBirthDate(memberJoinRequest.getMemberBirthDate())
+                            .memberJoinDate(LocalDateTime.now())
+                            .memberEmailReceive(memberJoinRequest.getMemberEmailReceive())
+                            .memberName(memberJoinRequest.getMemberName())
+                            .memberGender(memberJoinRequest.getMemberGender())
+                            .memberPwQuestion(memberJoinRequest.getMemberPwQuestion())
+                            .memberPwAnswer(memberJoinRequest.getMemberPwAnswer())
+                            .build());
+
+            // 회원가입 검사
+            if (!companyMemberService.checkId(memberJoinRequest.getMemberId())) {
+                throw new BadRequestException("회원가입에 실패했습니다.");
+            }
+
+            // 회원가입 성공
+            return ResponseEntity.ok().build();
+
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("회원가입에 실패했습니다.");
         }
     }
 
