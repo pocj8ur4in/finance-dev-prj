@@ -258,6 +258,62 @@ public class MemberUseCase {
         }
     }
 
+    @MethodInfo(name = "findNotices", description = "공지사항 목록 조회를 합니다.")
+    public ResponseEntity<ArrayList<MemberNoticeResponse>> findNotices(
+            MemberNoticesRequest memberNoticesRequest) throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberNoticesRequest.getAccessToken().isEmpty()) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(memberNoticesRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (!companyMemberService.checkId(memberId)) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 공지사항 목록 조회
+            ArrayList<MemberNoticeResponse> memberNoticeResponses = new ArrayList<>();
+
+            for (CompanyNoticeEntity companyNoticeEntity :
+                    companyNoticeService.searchByMember(
+                            memberNoticesRequest.getSearchType(),
+                            memberNoticesRequest.getSearchContent())) {
+                memberNoticeResponses.add(
+                        MemberNoticeResponse.builder()
+                                .noticeId(companyNoticeEntity.getNoticeIdx())
+                                .noticeTitle(companyNoticeEntity.getNoticeTitle())
+                                .noticeDate(
+                                        companyNoticeEntity
+                                                .getNoticeDate()
+                                                .format(
+                                                        java.time.format.DateTimeFormatter
+                                                                .ofPattern("yyyy-MM-dd")))
+                                .noticeMemberId(companyNoticeEntity.getNoticeMemberId())
+                                .build());
+            }
+
+            return ResponseEntity.ok(memberNoticeResponses);
+
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("공지사항 목록 조회에 실패했습니다.");
+        }
+    }
+
 
     @Builder
     public MemberUseCase(

@@ -124,6 +124,30 @@ public class MemberRestController {
         return memberUseCase.findPw(memberFindPwRequest);
     }
 
+    @MethodInfo(name = "memberPwChange", description = "회원 비밀번호 변경을 합니다.")
+    @GetMapping("/notices")
+    @Operation(
+            summary = "회원 공지사항 목록 조회",
+            description = "회원 공지사항 목록을 조회합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "회원 공지사항 목록 조회 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(
+                                                        implementation =
+                                                                MemberNoticeResponse.class))),
+                @ApiResponse(responseCode = "400", description = "회원 공지사항 목록 조회 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<ArrayList<MemberNoticeResponse>> memberNotices(
+            @RequestBody MemberNoticesRequest memberNoticesRequest) throws Exception {
+        return memberUseCase.findNotices(memberNoticesRequest);
+    }
+
 
     public MemberRestController(MemberUseCase memberUseCase) {
         this.memberUseCase = memberUseCase;

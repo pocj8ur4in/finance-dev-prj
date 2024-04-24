@@ -15,6 +15,32 @@ public class CompanyNoticeService {
     private final EntityManager entityManager;
     private final CompanyNoticeRepository companyNoticeRepository;
 
+    @MethodInfo(name = "searchByMember", description = "회원 조건에 맞게 공지사항을 검색합니다.")
+    public ArrayList<CompanyNoticeEntity> searchByMember(
+            MemberType searchType, String searchContent) {
+        if (searchType == MemberType.NAME) {
+            return new ArrayList<>(
+                    companyNoticeRepository.findAllByNoticeTitleContaining(
+                            Pageable.unpaged(), searchContent));
+        } else if (searchType == MemberType.CONTENT) {
+            return new ArrayList<>(
+                    companyNoticeRepository.findAllByNoticeContentContaining(
+                            Pageable.unpaged(), searchContent));
+        } else if (searchType == MemberType.AUTHOR) {
+            return new ArrayList<>(
+                    companyNoticeRepository.findAllByNoticeMemberIdContaining(
+                            Pageable.unpaged(), searchContent));
+        } else {
+            return new ArrayList<>(
+                    companyNoticeRepository
+                            .findAllByNoticeTitleContainingOrNoticeContentContainingOrNoticeMemberIdContaining(
+                                    Pageable.unpaged(),
+                                    searchContent,
+                                    searchContent,
+                                    searchContent));
+        }
+    }
+
     @MethodInfo(name = "searchByAdmin", description = "관리자 조건에 맞게 공지사항을 검색합니다.")
     public ArrayList<CompanyNoticeEntity> searchByAdmin(
             AdminNoticeType searchType,
