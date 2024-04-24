@@ -225,6 +225,39 @@ public class MemberUseCase {
         }
     }
 
+    @MethodInfo(name = "findPw", description = "비밀번호 찾기를 합니다.")
+    public ResponseEntity<MemberFindPwResponse> findPw(MemberFindPwRequest memberFindPwRequest)
+            throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberFindPwRequest.getMemberId().isEmpty()
+                    || memberFindPwRequest.getMemberName().isEmpty()
+                    || memberFindPwRequest.getMemberEmail().isEmpty()) {
+                throw new BadRequestException("아이디, 이름, 이메일을 입력해주세요.");
+            }
+
+            // 비밀번호 찾기
+            String memberPw =
+                    companyMemberService.findPw(
+                            memberFindPwRequest.getMemberId(),
+                            memberFindPwRequest.getMemberName(),
+                            memberFindPwRequest.getMemberEmail());
+
+            // 비밀번호 찾기 검사
+            if (memberPw == null) {
+                throw new BadRequestException("일치하는 비밀번호가 없습니다.");
+            }
+
+            // 비밀번호 찾기 성공
+            return ResponseEntity.ok(MemberFindPwResponse.builder().memberPw(memberPw).build());
+
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("비밀번호 찾기에 실패했습니다.");
+        }
+    }
+
 
     @Builder
     public MemberUseCase(

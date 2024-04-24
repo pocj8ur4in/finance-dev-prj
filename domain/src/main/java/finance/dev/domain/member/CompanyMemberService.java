@@ -89,6 +89,15 @@ public class CompanyMemberService {
         return companyMemberRepository.findByMemberNameAndMemberEmail(memberName, memberEmail);
     }
 
+    @MethodInfo(name = "findPw", description = "회원 비밀번호를 찾습니다.")
+    public String findPw(String memberId, String memberName, String memberEmail) {
+        CompanyMemberEntity companyMemberEntity =
+                companyMemberRepository.findByMemberIdAndMemberNameAndMemberEmail(
+                        memberId, memberName, memberEmail);
+
+        return companyMemberEntity == null ? null : companyMemberEntity.getMemberPw();
+    }
+
     @Builder
     public CompanyMemberService(CompanyMemberRepository companyMemberRepository) {
         this.companyMemberRepository = companyMemberRepository;
