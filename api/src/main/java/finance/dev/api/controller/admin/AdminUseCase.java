@@ -221,6 +221,49 @@ public class AdminUseCase {
         }
     }
 
+    @MethodInfo(name = "createNotice", description = "공지사항을 생성합니다.")
+    public ResponseEntity<Void> createNotice(AdminNoticeCreateRequest adminNoticeCreateRequest)
+            throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (adminNoticeCreateRequest.getAccessToken() == null) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(adminNoticeCreateRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (companyAdminService.checkId(memberId)) {
+                throw new BadRequestException("아이디가 존재하지 않습니다.");
+            }
+
+            // 공지사항 생성
+            companyNoticeService.save(
+                    CompanyNoticeEntity.builder()
+                            .noticeTitle(adminNoticeCreateRequest.getNoticeTitle())
+                            .noticeContent(adminNoticeCreateRequest.getNoticeContent())
+                            .noticeMemberId(memberId)
+                            .noticeDate(LocalDateTime.now())
+                            .build());
+
+            return ResponseEntity.ok().build();
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("공지사항을 생성하는데 실패했습니다.");
+        }
+    }
+
     @Builder
     public AdminUseCase(
             CompanyAdminService companyAdminService,

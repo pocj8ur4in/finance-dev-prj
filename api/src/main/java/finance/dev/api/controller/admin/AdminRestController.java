@@ -135,6 +135,39 @@ public class AdminRestController {
     public ResponseEntity<AdminNoticeNumberResponse> adminNoticesNumber() throws Exception {
         return adminUseCase.findNoticesNumber();
     }
+
+    @MethodInfo(name = "createAdminNotice", description = "관리자 공지사항을 등록합니다.")
+    @GetMapping("/notice")
+    @Operation(
+            summary = "관리자 공지사항 등록",
+            description = "관리자 공지사항을 등록합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(responseCode = "200", description = "관리자 공지사항 등록 성공"),
+                @ApiResponse(responseCode = "400", description = "관리자 공지사항 등록 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<Void> createAdminNotice(
+            @RequestBody AdminNoticeCreateRequest adminNoticeCreateRequest) throws Exception {
+        return adminUseCase.createNotice(adminNoticeCreateRequest);
+    }
+
+    @MethodInfo(name = "updateAdminNotice", description = "관리자 공지사항을 수정합니다.")
+    @GetMapping("/notice/update")
+    @Operation(
+            summary = "관리자 공지사항 수정",
+            description = "관리자 공지사항을 수정합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(responseCode = "200", description = "관리자 공지사항 수정 성공"),
+                @ApiResponse(responseCode = "400", description = "관리자 공지사항 수정 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<AdminNoticeResponse> updateAdminNotice(
+            @RequestBody AdminNoticeUpdateRequest adminNoticeUpdateRequest) throws Exception {
+        return adminUseCase.updateNotice(adminNoticeUpdateRequest);
+    }
+
     public AdminRestController(AdminUseCase adminUseCase) {
         this.adminUseCase = adminUseCase;
     }

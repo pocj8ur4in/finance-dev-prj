@@ -93,6 +93,12 @@ public class CompanyNoticeService {
     public long count() {
         return companyNoticeRepository.count();
     }
+
+    @MethodInfo(name = "save", description = "공지사항을 저장합니다.")
+    public void save(CompanyNoticeEntity companyNoticeEntity) {
+        companyNoticeRepository.save(companyNoticeEntity);
+    }
+
     @Builder
     public CompanyNoticeService(
             CompanyNoticeRepository companyNoticeRepository, EntityManager entityManager) {
