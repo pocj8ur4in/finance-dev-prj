@@ -314,6 +314,61 @@ public class MemberUseCase {
         }
     }
 
+    @MethodInfo(name = "findQnas", description = "QnA 목록 조회를 합니다.")
+    public ResponseEntity<ArrayList<MemberQnaResponse>> findQnas(
+            MemberQnasRequest memberQnasRequest) throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberQnasRequest.getAccessToken().isEmpty()) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(memberQnasRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (!companyMemberService.checkId(memberId)) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // QnA 목록 조회
+            ArrayList<MemberQnaResponse> memberQnaResponses = new ArrayList<>();
+
+            for (CompanyQnaEntity companyQnaEntity :
+                    companyQnaService.searchByMember(
+                            memberQnasRequest.getSearchType(),
+                            memberQnasRequest.getSearchContent())) {
+                memberQnaResponses.add(
+                        MemberQnaResponse.builder()
+                                .qnaId(companyQnaEntity.getQnaIdx())
+                                .qnaName(companyQnaEntity.getQnaName())
+                                .qnaTitle(companyQnaEntity.getQnaTitle())
+                                .qnaDate(
+                                        companyQnaEntity
+                                                .getQnaDate()
+                                                .format(
+                                                        java.time.format.DateTimeFormatter
+                                                                .ofPattern("yyyy-MM-dd")))
+                                .build());
+            }
+
+            return ResponseEntity.ok(memberQnaResponses);
+
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("FAQ 목록 조회에 실패했습니다.");
+        }
+    }
 
     @Builder
     public MemberUseCase(
