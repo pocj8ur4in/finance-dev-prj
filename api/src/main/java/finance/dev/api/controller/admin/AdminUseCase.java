@@ -329,6 +329,59 @@ public class AdminUseCase {
         }
     }
 
+    @MethodInfo(name = "findOne2ones", description = "1:1 문의 목록을 가져옵니다.")
+    public ResponseEntity<ArrayList<AdminOne2oneResponse>> findOne2ones(
+            AdminOne2onesRequest adminOne2onesRequest) throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (adminOne2onesRequest.getAccessToken() == null) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(adminOne2onesRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (companyAdminService.checkId(memberId)) {
+                throw new BadRequestException("아이디가 존재하지 않습니다.");
+            }
+
+            // 1:1 문의 목록을 가져옴
+            ArrayList<AdminOne2oneResponse> adminOne2oneResponses = new ArrayList<>();
+
+            companyOne2OneService
+                    .findAll()
+                    .forEach(
+                            companyOne2OneEntity ->
+                                    adminOne2oneResponses.add(
+                                            AdminOne2oneResponse.builder()
+                                                    .one2oneId(companyOne2OneEntity.getOne2OneIdx())
+                                                    .one2oneTitle(
+                                                            companyOne2OneEntity.getOne2OneTitle())
+                                                    .one2oneContent(
+                                                            companyOne2OneEntity
+                                                                    .getOne2OneContent())
+                                                    .one2oneDate(
+                                                            companyOne2OneEntity.getOne2OneDate())
+                                                    .build()));
+
+            return ResponseEntity.ok(adminOne2oneResponses);
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("1:1 문의 목록을 불러오는데 실패했습니다.");
+        }
+    }
+
     @Builder
     public AdminUseCase(
             CompanyAdminService companyAdminService,

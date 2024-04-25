@@ -168,6 +168,30 @@ public class AdminRestController {
         return adminUseCase.updateNotice(adminNoticeUpdateRequest);
     }
 
+    @MethodInfo(name = "deleteAdminNotice", description = "관리자 일대일문의를 조회합니다.")
+    @GetMapping("/one2ones")
+    @Operation(
+            summary = "관리자 일대일문의 목록 조회",
+            description = "관리자 일대일문의 목록을 조회합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "관리자 일대일문의 목록 조회 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(
+                                                        implementation =
+                                                                AdminOne2oneResponse.class))),
+                @ApiResponse(responseCode = "400", description = "관리자 일대일문의 목록 조회 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<ArrayList<AdminOne2oneResponse>> adminOne2ones(
+            @RequestBody AdminOne2onesRequest adminOne2onesRequest) throws Exception {
+        return adminUseCase.findOne2ones(adminOne2onesRequest);
+    }
+
     public AdminRestController(AdminUseCase adminUseCase) {
         this.adminUseCase = adminUseCase;
     }
