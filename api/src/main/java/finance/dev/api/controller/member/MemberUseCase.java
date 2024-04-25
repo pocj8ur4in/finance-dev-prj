@@ -423,6 +423,66 @@ public class MemberUseCase {
         }
     }
 
+    @MethodInfo(name = "findQna", description = "QnA 상세 조회를 합니다.")
+    public ResponseEntity<MemberQnaResponse> findQna(MemberQnaRequest memberQnaRequest)
+            throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberQnaRequest.getAccessToken().isEmpty() || memberQnaRequest.getQnaId() == 0) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(memberQnaRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (!companyMemberService.checkId(memberId)) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // FAQ 상세 조회
+
+            CompanyQnaEntity companyQnaEntity =
+                    companyQnaService.findQna(memberQnaRequest.getQnaId());
+
+            if (companyQnaEntity == null) {
+                throw new BadRequestException("일치하는 QnA가 없습니다.");
+            }
+
+            if (!companyQnaEntity.getQnaPw().equals(memberQnaRequest.getMemberPw())) {
+                throw new BadRequestException("비밀번호가 일치하지 않습니다.");
+            }
+
+            return ResponseEntity.ok(
+                    MemberQnaResponse.builder()
+                            .qnaId(companyQnaEntity.getQnaIdx())
+                            .qnaName(companyQnaEntity.getQnaName())
+                            .qnaTitle(companyQnaEntity.getQnaTitle())
+                            .qnaContent(companyQnaEntity.getQnaContent())
+                            .qnaDate(
+                                    companyQnaEntity
+                                            .getQnaDate()
+                                            .format(
+                                                    java.time.format.DateTimeFormatter.ofPattern(
+                                                            "yyyy-MM-dd")))
+                            .build());
+
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("QnA 상세 조회에 실패했습니다.");
+        }
+    }
+
     @Builder
     public MemberUseCase(
             CompanyMemberService companyMemberService,

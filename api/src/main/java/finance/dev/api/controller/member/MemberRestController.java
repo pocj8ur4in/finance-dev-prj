@@ -188,6 +188,49 @@ public class MemberRestController {
         return memberUseCase.one2one(memberOne2oneRequest);
     }
 
+    @MethodInfo(name = "memberQnas", description = "회원 QnA 목록 조회를 합니다.")
+    @GetMapping("/qnas")
+    @Operation(
+            summary = "회원 QnA 목록 조회",
+            description = "회원 QnA 목록을 조회합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "회원 QnA 목록 조회 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(implementation = MemberQnaResponse.class))),
+                @ApiResponse(responseCode = "400", description = "회원 QnA 목록 조회 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<ArrayList<MemberQnaResponse>> memberQnas(
+            @RequestBody MemberQnasRequest memberQnasRequest) throws Exception {
+        return memberUseCase.findQnas(memberQnasRequest);
+    }
+
+    @MethodInfo(name = "memberQna", description = "회원 QnA 상세 조회를 합니다.")
+    @GetMapping("/qna")
+    @Operation(
+            summary = "회원 QnA 상세 조회",
+            description = "회원 QnA 상세를 조회합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "회원 QnA 상세 조회 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(implementation = MemberQnaResponse.class))),
+                @ApiResponse(responseCode = "400", description = "회원 QnA 상세 조회 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<MemberQnaResponse> memberQna(
+            @RequestBody MemberQnaRequest memberQnaRequest) throws Exception {
+        return memberUseCase.findQna(memberQnaRequest);
+    }
 
     public MemberRestController(MemberUseCase memberUseCase) {
         this.memberUseCase = memberUseCase;

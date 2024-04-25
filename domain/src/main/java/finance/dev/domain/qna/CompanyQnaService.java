@@ -29,6 +29,10 @@ public class CompanyQnaService {
         }
     }
 
+    @MethodInfo(name = "findQna", description = "QnA를 조회합니다.")
+    public CompanyQnaEntity findQna(int qnaId) {
+        return companyQnaRepository.findById((long) qnaId).orElse(null);
+    }
 
     @Builder
     public CompanyQnaService(CompanyQnaRepository companyQnaRepository) {
