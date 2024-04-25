@@ -367,6 +367,55 @@ public class MemberUseCase {
         }
     }
 
+    @MethodInfo(name = "one2one", description = "1:1 문의를 합니다.")
+    public ResponseEntity<Void> one2one(MemberOne2oneRequest memberOne2oneRequest)
+            throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberOne2oneRequest.getAccessToken().isEmpty()
+                    || memberOne2oneRequest.getOne2oneTitle().isEmpty()
+                    || memberOne2oneRequest.getOne2oneContent().isEmpty()) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(memberOne2oneRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (!companyMemberService.checkId(memberId)) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 1:1 문의
+            companyOne2OneService.createOne2One(
+                    CompanyOne2OneEntity.builder()
+                            .one2OneName(memberOne2oneRequest.getOne2oneName())
+                            .one2OnePhone(memberOne2oneRequest.getOne2onePhone())
+                            .one2OneEmail(memberOne2oneRequest.getOne2oneEmail())
+                            .one2OneAddress(memberOne2oneRequest.getOne2oneAddress())
+                            .one2OneTitle(memberOne2oneRequest.getOne2oneTitle())
+                            .one2OneContent(memberOne2oneRequest.getOne2oneContent())
+                            .one2OneDate(memberOne2oneRequest.getOne2oneDate())
+                            .build());
+
+            // 1:1 문의 성공
+            return ResponseEntity.ok().build();
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("1:1 문의에 실패했습니다.");
+        }
+    }
+
     @MethodInfo(name = "findQnas", description = "QnA 목록 조회를 합니다.")
     public ResponseEntity<ArrayList<MemberQnaResponse>> findQnas(
             MemberQnasRequest memberQnasRequest) throws Exception {
