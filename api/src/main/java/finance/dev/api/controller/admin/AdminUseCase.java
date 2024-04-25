@@ -264,6 +264,71 @@ public class AdminUseCase {
         }
     }
 
+    @MethodInfo(name = "updateNotice", description = "공지사항을 수정합니다.")
+    public ResponseEntity<AdminNoticeResponse> updateNotice(
+            AdminNoticeUpdateRequest adminNoticeUpdateRequest) throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (adminNoticeUpdateRequest.getAccessToken() == null) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(adminNoticeUpdateRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (companyAdminService.checkId(memberId)) {
+                throw new BadRequestException("아이디가 존재하지 않습니다.");
+            }
+
+            // 공지사항 수정 대상 탐색
+            CompanyNoticeEntity companyNoticeEntity =
+                    companyNoticeService.findNotice(adminNoticeUpdateRequest.getNoticeId());
+
+            // 공지사항 수정 대상이 존재하는지 체크
+            if (companyNoticeEntity == null) {
+                throw new BadRequestException("수정할 공지사항이 존재하지 않습니다.");
+            }
+
+            // 공지사항 수정
+            companyNoticeService.save(
+                    CompanyNoticeEntity.builder()
+                            .noticeIdx(adminNoticeUpdateRequest.getNoticeId())
+                            .noticeTitle(adminNoticeUpdateRequest.getNoticeTitle())
+                            .noticeContent(adminNoticeUpdateRequest.getNoticeContent())
+                            .noticeMemberId(memberId)
+                            .noticeDate(companyNoticeEntity.getNoticeDate())
+                            .build());
+
+            // 공지사항 수정 검사
+            if (companyNoticeService.findNotice(adminNoticeUpdateRequest.getNoticeId()) == null) {
+                throw new BadRequestException("공지사항을 수정하는데 실패했습니다.");
+            }
+
+            // 공지사항 수정 결과 반환
+            return ResponseEntity.ok(
+                    AdminNoticeResponse.builder()
+                            .noticeId(adminNoticeUpdateRequest.getNoticeId())
+                            .noticeTitle(adminNoticeUpdateRequest.getNoticeTitle())
+                            .noticeContent(adminNoticeUpdateRequest.getNoticeContent())
+                            .noticeMemberId(memberId)
+                            .build());
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("공지사항을 수정하는데 실패했습니다.");
+        }
+    }
+
     @Builder
     public AdminUseCase(
             CompanyAdminService companyAdminService,
