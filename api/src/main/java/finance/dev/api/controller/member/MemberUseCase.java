@@ -314,6 +314,59 @@ public class MemberUseCase {
         }
     }
 
+    @MethodInfo(name = "findNotice", description = "공지사항 상세 조회를 합니다.")
+    public ResponseEntity<MemberNoticeResponse> findNotice(MemberNoticeRequest memberNoticeRequest)
+            throws Exception {
+        try {
+            // 값이 비어있지 않은지 체크
+            if (memberNoticeRequest.getAccessToken().isEmpty()
+                    || memberNoticeRequest.getNoticeId() == 0) {
+                throw new BadRequestException("로그인이 필요합니다.");
+            }
+
+            // 토큰을 검증하고 아이디를 가져옴
+            String memberId =
+                    JWT.require(Algorithm.HMAC512(System.getenv("JWT_SECRET")))
+                            .build()
+                            .verify(memberNoticeRequest.getAccessToken())
+                            .getSubject();
+
+            // 아이디 검사
+            if (memberId == null) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 아이디가 존재하는지 체크
+            if (!companyMemberService.checkId(memberId)) {
+                throw new BadRequestException("토큰이 유효하지 않습니다.");
+            }
+
+            // 공지사항 상세 조회
+            CompanyNoticeEntity companyNoticeEntity =
+                    companyNoticeService.findNotice(memberNoticeRequest.getNoticeId());
+
+            // 공지사항 상세 조회 성공
+            return ResponseEntity.ok(
+                    MemberNoticeResponse.builder()
+                            .noticeId(companyNoticeEntity.getNoticeIdx())
+                            .noticeTitle(companyNoticeEntity.getNoticeTitle())
+                            .noticeDate(
+                                    companyNoticeEntity
+                                            .getNoticeDate()
+                                            .format(
+                                                    java.time.format.DateTimeFormatter.ofPattern(
+                                                            "yyyy-MM-dd")))
+                            .noticeMemberId(companyNoticeEntity.getNoticeMemberId())
+                            .noticeContent(companyNoticeEntity.getNoticeContent())
+                            .build());
+
+        } catch (BadRequestException e) {
+            throw new BadRequestException(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("공지사항 상세 조회에 실패했습니다.");
+        }
+    }
+
     @MethodInfo(name = "findQnas", description = "QnA 목록 조회를 합니다.")
     public ResponseEntity<ArrayList<MemberQnaResponse>> findQnas(
             MemberQnasRequest memberQnasRequest) throws Exception {

@@ -148,6 +148,46 @@ public class MemberRestController {
         return memberUseCase.findNotices(memberNoticesRequest);
     }
 
+    @MethodInfo(name = "memberNotice", description = "회원 공지사항 상세 조회를 합니다.")
+    @GetMapping("/notice")
+    @Operation(
+            summary = "회원 공지사항 상세 조회",
+            description = "회원 공지사항 상세를 조회합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "회원 공지사항 상세 조회 성공",
+                        content =
+                                @Content(
+                                        schema =
+                                                @Schema(
+                                                        implementation =
+                                                                MemberNoticeResponse.class))),
+                @ApiResponse(responseCode = "400", description = "회원 공지사항 상세 조회 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<MemberNoticeResponse> memberNotice(
+            @RequestBody MemberNoticeRequest memberNoticeRequest) throws Exception {
+        return memberUseCase.findNotice(memberNoticeRequest);
+    }
+
+    @MethodInfo(name = "memberOne2one", description = "회원 일대일문의 등록을 합니다.")
+    @GetMapping("/one2one")
+    @Operation(
+            summary = "회원 일대일문의 등록",
+            description = "회원 일대일문의를 등록합니다.",
+            method = "GET",
+            responses = {
+                @ApiResponse(responseCode = "200", description = "회원 일대일문의 등록 성공"),
+                @ApiResponse(responseCode = "400", description = "회원 일대일문의 등록 실패"),
+                @ApiResponse(responseCode = "500", description = "서버 에러")
+            })
+    public ResponseEntity<Void> memberOne2one(
+            @RequestBody MemberOne2oneRequest memberOne2oneRequest) throws Exception {
+        return memberUseCase.one2one(memberOne2oneRequest);
+    }
+
 
     public MemberRestController(MemberUseCase memberUseCase) {
         this.memberUseCase = memberUseCase;

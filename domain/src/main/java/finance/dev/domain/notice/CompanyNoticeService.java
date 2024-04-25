@@ -89,6 +89,12 @@ public class CompanyNoticeService {
         return new ArrayList<>(
                 entityManager.createNativeQuery(query, CompanyNoticeEntity.class).getResultList());
     }
+
+    @MethodInfo(name = "findNotice", description = "공지사항을 조회합니다.")
+    public CompanyNoticeEntity findNotice(int noticeId) {
+        return companyNoticeRepository.findByNoticeIdx(noticeId);
+    }
+
     @MethodInfo(name = "count", description = "공지사항의 개수를 조회합니다.")
     public long count() {
         return companyNoticeRepository.count();
