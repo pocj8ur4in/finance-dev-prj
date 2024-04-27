@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+</head>
+
+<body>
+    <header class="bg-green-700 shadow-md">
+        <div id="admin" class="container hidden mx-auto py-4 px-4 md:px-8 flex justify-between items-center">
+            <nav class="flex items-center">
+                <ul class="flex space-x-4 md:space-x-6">
+                    <li><button id="adminMemberList" class="text-white hover:text-gray-200">회원관리</button></li>
+                    <li><button id="adminNoticeList" class="text-white hover:text-gray-200">공지사항</button></li>
+                </ul>
+            </nav>
+            <div class="flex space-x-4 md:space-x-6">
+                <div class="text-white">관리자</div>
+                <button id="adminLogout" class="text-white hover:text-gray-200">로그아웃</button>
+            </div>
+        </div>
+    </header>
+
+    <header class="bg-green-700 shadow-md">
+        <div id="member" class="container hidden mx-auto py-4 px-4 md:px-8 flex justify-between items-center">
+            <nav class="flex items-center">
+                <ul class="flex space-x-4 md:space-x-6">
+                    <li><button id="memberQnaList" class="text-white hover:text-gray-200">Q&A</button></li>
+                    <li><button id="memberOne2oneList" class="text-white hover:text-gray-200">1:1문의</button></li>
+                    <li><button id="memberNoticeList" class="text-white hover:text-gray-200">공지사항</button></li>
+                </ul>
+            </nav>
+            <div class="flex space-x-4 md:space-x-6">
+                <div class="text-white">회원</div>
+                <button id="memberLogout" class="text-white hover:text-gray-200">로그아웃</button>
+            </div>
+        </div>
+    </header>
+
+    <header class="bg-green-700 shadow-md">
+        <div id="logout" class="container hidden mx-auto py-4 px-4 md:px-8 flex justify-between items-center">
+            <nav class="flex items-center">
+                <ul class="flex space-x-4 md:space-x-6">
+                    <li><button onclick="requiredLogin()" class="text-white hover:text-gray-200">Q&A</button></li>
+                    <li><button onclick="requiredLogin()" class="text-white hover:text-gray-200">1:1문의</button></li>
+                    <li><button onclick="requiredLogin()" class="text-white hover:text-gray-200">공지사항</button></li>
+                </ul>
+            </nav>
+            <nav class="flex space-x-4 md:space-x-6">
+                <button id="memberLogin" class="text-white hover:text-gray-200">회원</button>
+                <button id="adminLogin" class="text-white hover:text-gray-200">관리자</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-4 md:py-8">
+        <section class="bg-gradient-to-r from-green-600 to-green-400 text-white py-12 md:py-20">
+            <div class="container mx-auto text-center">
+                <div class="carousel">
+                    <div>
+                        <h1 class="text-2xl md:text-4xl font-bold mb-2 md:mb-4">우리의 서비스를 경험하세요</h1>
+                        <p class="text-sm md:text-lg">최고의 서비스를 제공합니다.</p>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl md:text-4xl font-bold mb-2 md:mb-4">최고의 서비스를 경험하세요</h1>
+                        <p class="text-sm md:text-lg">우리는 항상 최선을 다하겠습니다.</p>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl md:text-4xl font-bold mb-2 md:mb-4">최상의 서비스를 경험하세요</h1>
+                        <p class="text-sm md:text-lg">우리는 항상 최상의 서비스를 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-6 md:py-12">
+            <div class="container mx-auto text-center">
+                <h2 class="text-lg md:text-3xl font-bold mb-4 md:mb-6">우리의 특징</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                    <div class="p-4 md:p-6 bg-green-100 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-base md:text-xl font-semibold mb-2 text-green-600">간편한 사용</h3>
+                        <p class="text-xs md:text-sm">사용하기 쉬운 인터페이스로 누구나 쉽게 사용할 수 있습니다.</p>
+                    </div>
+                    <div class="p-4 md:p-6 bg-green-100 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-base md:text-xl font-semibold mb-2 text-green-600">고품질 서비스</h3>
+                        <p class="text-xs md:text-sm">우리는 항상 고객에게 최상의 서비스를 제공하기 위해 노력합니다.</p>
+                    </div>
+                    <div class="p-4 md:p-6 bg-green-100 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-base md:text-xl font-semibold mb-2 text-green-600">24/7 지원</h3>
+                        <p class="text-xs md:text-sm">문제가 발생하면 언제든지 연락주세요. 우리의 팀이 도와드릴 것입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-6 md:py-12">
+            <div class="container mx-auto text-center">
+                <h2 class="text-lg md text-3xl font-bold mb-4 md:mb-6">서비스 소개</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                    <div class="p-4 md:p-6 bg-green-100 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-base md:text-xl font-semibold mb-2 text-green-600">Q&A</h3>
+                        <p class="text-xs md:text-sm">자주 묻는 질문을 확인하고 궁금한 것을 물어보세요.</p>
+                    </div>
+                    <div class="p-4 md:p-6 bg-green-100 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-base md:text-xl font-semibold mb-2 text-green-600">1:1문의</h3>
+                        <p class="text-xs md:text-sm">개인적인 문제가 있을 때 1:1문의를 통해 해결하세요.</p>
+                    </div>
+                    <div class="p-4 md:p-6 bg-green-100 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-base md:text-xl font-semibold mb-2 text-green-600">공지사항</h3>
+                        <p class="text-xs md:text-sm">최신 공지사항을 확인하고 서비스 이용에 참고하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fixed bottom-0 left-0 w-full bg-green-900 text-white py-4 md:py-6">
+        <div class="container mx-auto text-center">
+            <p class="text-xs md:text-sm">&copy; COPYRIGHT(C) 2024 BY ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <div id="memberJoinPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 overflow-y-auto">
+        <form id="memberJoinForm" class="popup bg-white p-8 rounded-lg">
+        <h3 class="text-center col-span-2 text-base md:text-xl font-semibold mt-10 mb-2">
+                회원가입
+            </h3>
+            <div class="mb-4">
+                <label for="memberJoinId" class="block text-sm font-semibold text-gray-700">아이디 (영문 소문자/숫자로 4~16자)</label>
+                <input type="text" id="memberJoinId" oninput="validate()" name="id" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <div id="idCheck" class="text-red-500 text-sm"></div>
+            </div>
+            <div class="mb-4">
+                <button type="button" id="idCheckAjax" class="bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">중복확인</button>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="mb-4">
+                    <label for="memberJoinPassword" class="block text-sm font-semibold text-gray-700">비밀번호 (영문/숫자/특수문자조합으로 8~16자리, 첫글자는 영문자로 사용)</label>
+                    <input type="password" name="password" oninput="validate()" id="memberJoinPassword" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                    <div id="passwordCheck" class="text-red-500 text-sm"></div>
+                </div>
+                <div class="mb-4">
+                    <label for="memberPwConfirm" class="block text-sm font-semibold text-gray-700">비밀번호 확인</label>
+                    <input type="password" id="memberPwConfirm" oninput="validate()" name="passwordConfirm" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                    <div id="passwordConfirmCheck" class="text-red-500 text-sm"></div>
+                </div>
+                <div class="mb-4">
+                    <label for="memberEmail" class="block text-sm font-semibold text-gray-700">이메일</label>
+                    <input type="email" id="memberEmail" oninput="validate()" name="email" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                    <div id="emailCheck" class="text-red-500 text-sm"></div>
+                </div>
+                <div class="mb-4">
+                    <label for="memberEmailReceive" class="block text-sm font-semibold text-gray-700">이메일 수신 여부</label>
+                    <select id="memberEmailReceive" name="emailReceive" oninput="validate()" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                        <option value="1">수신</option>
+                        <option value="0">수신하지 않음</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="memberQuestion" class="block text-sm font-semibold text-gray-700">비밀번호 확인시 질문</label>
+                    <select id="memberQuestion" name="question" oninput="validate()" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                        <option value="1">당신의 고향은?</option>
+                        <option value="2">당신의 출신 초등학교는?</option>
+                        <option value="3">당신의 첫사랑은?</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="memberAnswer" class="block text-sm font-semibold text-gray-700">비밀번호 확인시 답변</label>
+                    <input type="text" id="memberAnswer" name="answer" oninput="validate()" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                    <div id="answerCheck" class="text-red-500 text-sm"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="mb-4">
+                    <label for="memberName" class="block text-sm font-semibold text-gray-700">이름</label>
+                    <input type="text" id="memberName" oninput="validate()" name="name" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                    <div id="nameCheck" class="text-red-500 text-sm"></div>
+                </div>
+                <div class="mb-4">
+                    <label for="memberGender" class="block text-sm font-semibold text-gray-700">성별</label>
+                    <select id="memberGender" name="gender" oninput="validate()" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="memberBirth" class="block text-sm font-semibold text-gray-700">생년월일</label>
+                    <input type="date" id="memberBirth" oninput="validate()" name="birth" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                    <div id="birthCheck" class="text-red-500 text-sm"></div>
+                </div>
+            </div>
+            <div class="col-span-2 flex items-center justify-center">
+                <button type="submit" id="memberJoinAjax" class="mt-4 bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">회원가입</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="memberLoginPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <form class="popup bg-white p-8 rounded-lg">
+            <h3 class="text-center m-2 text-base md:text-xl font-semibold mb-2">
+                회원 로그인
+            </h3>
+            <div class="mb-4">
+                <label for="loginId" class="block text-sm font-semibold text-gray-700">아이디</label>
+                <input type="text" id="loginId" name="id" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="loginPassword" class="block text-sm font-semibold text-gray-700">비밀번호</label>
+                <input type="password" id="loginPassword" name="password" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" id="memberLoginAjax" class="mt-4 bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">로그인</button>
+            </div>
+            <div class="flex items-center justify-end">
+                <button id="memberJoin" class="hover:underline text-sm">회원가입</button>
+            </div>
+            <div class="flex items-center justify-end">
+                <button id="forgotIdLink" class="hover:underline text-sm">아이디 찾기</button>
+            </div>
+            <div class="flex items-center justify-end">
+                <button id="forgotPasswordLink" class="hover:underline text-sm">비밀번호 찾기</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminLoginPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <form class="popup bg-white p-8 rounded-lg">
+            <h3 class="text-center m-2 text-base md:text-xl font-semibold mb-2">
+                관리자 로그인
+            </h3>
+            <div class="mb-4">
+                <label for="id" class="block text-sm font-semibold text-gray-700">아이디</label>
+                <input type="text" id="id" name="id" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-semibold text-gray-700">비밀번호</label>
+                <input type="password" id="password" name="password" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" id="adminLoginAjax" class="mt-4 bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">로그인</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="forgotIdPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <form class="popup bg-white p-8 rounded-lg">
+            <h3 class="text-center m-2 text-base md:text-xl font-semibold mb-2">
+                아이디 찾기
+            </h3>
+            <div class="mb-4">
+                <label for="findIdName" class="block text-sm font-semibold text-gray-700">이름</label>
+                <input type="text" id="findIdName" name="name" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label for="findIdEmail" class="block text-sm font-semibold text-gray-700">이메일</label>
+                <input type="email" id="findIdEmail" name="email" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" id="findId" class="mt-4 bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">
+                    찾기
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="forgotPasswordPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <form class="popup bg-white p-8 rounded-lg">
+            <h3 class="text-center m-2 text-base md:text-xl font-semibold mb-2">
+                비밀번호 찾기
+            </h3>
+            <div class="mb-4">
+                <label for="findPasswordName" class="block text-sm font-semibold text-gray-700">이름</label>
+                <input type="text" id="findPasswordName" name="name" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="findPasswordId" class="block text-sm font-semibold text-gray-700">아이디</label>
+                <input type="text" id="findPasswordId" name="email" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label for="findPasswordEmail" class="block text-sm font-semibold text-gray-700">이메일</label>
+                <input type="email" id="findPasswordEmail" name="email" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" id="findPassword" class="mt-4 bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">
+                    찾기
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminMemberListPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div class = "popup bg-white p-8 rounded-lg">
+            <h3 class = "text-center m-2 text-base md:text-xl font-semibold mb-2">
+                관리자 회원 목록 (<span id="memberCount"></span>명)
+            </h3>
+            <table class="w-full border border-gray-300 text-center">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">번호</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">아이디</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">이름</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">이메일</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">생일</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">가입일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" class="px-4 py-2 bg-gray-100 border-t border-gray-300">
+                            <div class="flex justify-center items-center">
+                                <label for="MemberListSearchType" class="mr-2"></label>
+                                <select name="searchType" onchange="changeAdminMemberListPopup()"
+                                        id="MemberListSearchType" class="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="ENTIRE">전체</option>
+                                    <option value="ID">아이디</option>
+                                    <option value="NAME">이름</option>
+                                    <option value="EMAIL">이메일</option>
+                                </select>
+                                <label for="MemberListSearchSort" class="mr-2"></label>
+                                <select name="searchSort" onchange="changeAdminMemberListPopup()"
+                                        id="MemberListSearchSort" class="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="ID_ASC">아이디 오름차순</option>
+                                    <option value="ID_DESC">아이디 내림차순</option>
+                                    <option value="JOIN_DATE_ASC">가입일 오름차순</option>
+                                    <option value="JOIN_DATE_DESC">가입일 내림차순</option>
+                                </select>
+                                <label for="MemberListSearchNumber" class="mr-2"></label>
+                                <select name="searchNumber" onchange="changeAdminMemberListPopup()"
+                                        id="MemberListSearchNumber" class="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="SIZE_5">5개씩 보기</option>
+                                    <option value="SIZE_10">10개씩 보기</option>
+                                    <option value="SIZE_ENTIRE">전체 보기</option>
+                                </select>
+                                <label for="MemberListSearchKeyword" class="mr-2"></label>
+                                <input type="text" oninput="changeAdminMemberListPopup()" id="MemberListSearchKeyword" name="searchKeyword" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="adminNoticeListPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div class = "popup bg-white p-8 rounded-lg">
+            <h3 class = "text-center m-2 text-base md:text-xl font-semibold mb-2">
+                관리자 공지사항 목록 (<span id="noticeCount"></span>개)
+            </h3>
+            <table class="w-full border border-gray-300 text-center">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">번호</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">제목</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">작성자</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">작성일</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" class="px-4 py-2 bg-gray-100 border-t border-gray-300">
+                            <div class="flex justify-center items-center">
+                                <label for="noticeSearchType" class="mr-2"></label>
+                                <select name="searchType" onchange="changeAdminNoticeListPopup()"
+                                        id="noticeSearchType" class="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="ENTIRE">전체</option>
+                                    <option value="NAME">이름</option>
+                                    <option value="CONTENT">내용</option>
+                                    <option value="ID">작성자 아이디</option>
+                                </select>
+                                <label for="noticeSearchSort" class="mr-2"></label>
+                                <select name="noticeSearchSort" onchange="changeAdminNoticeListPopup()"
+                                        id="noticeSearchSort" class="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="ID_ASC">아이디 오름차순</option>
+                                    <option value="ID_DESC">아이디 내림차순</option>
+                                    <option value="JOIN_DATE_ASC">가입일 오름차순</option>
+                                    <option value="JOIN_DATE_DESC">가입일 내림차순</option>
+                                </select>
+                                <label for="noticeSearchNumber" class="mr-2"></label>
+                                <select name="noticeSearchNumber" onchange="changeAdminNoticeListPopup()"
+                                        id="noticeSearchNumber" class="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="SIZE_5">5개씩 보기</option>
+                                    <option value="SIZE_10">10개씩 보기</option>
+                                    <option value="SIZE_ENTIRE">전체 보기</option>
+                                </select>
+                                <label for="noticeSearchKeyword" class="mr-2"></label>
+                                <input type="text" id="noticeSearchKeyword" oninput="changeAdminNoticeListPopup()" name="searchKeyword" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="flex items-center justify-end">
+                <button id="adminCreateNotice" class="hover:underline text-sm m-2">글쓰기</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminCreateNoticePopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <form class = "popup bg-white p-8 rounded-lg" >
+            <h3 class = "text-center m-2 text-base md:text-xl font-semibold mb-2">
+                관리자 공지사항 생성
+            </h3>
+            <div class="mb-4">
+                <label for="noticeTitle" class="block text-sm font-semibold text-gray-700">제목</label>
+                <input type="text" id="noticeTitle" oninput="validateNotice()" name="title" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <div id="noticeTitleCheckMessage" class="text-red-500 text-sm"></div>
+                <label for="noticeContent" class="block text-sm font-semibold text-gray-700">내용</label>
+                <textarea id="noticeContent" oninput="validateNotice()" name="content" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required></textarea>
+                <div id="noticeContentCheckMessage" class="text-red-500 text-sm"></div>
+                <label for="createNotice" class="block text-sm font-semibold text-gray-700"></label>
+                <button type="submit" id="createNotice" class="mt-1 px-4 py-2 w-full bg-green-100 text-green-600 font-semibold rounded-md hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">생성</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="adminUpdateNoticePopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <form class = "popup bg-white p-8 rounded-lg">
+            <h3 class = "text-center m-2 text-base md:text-xl font-semibold mb-2">
+                관리자 공지사항 수정
+            </h3>
+            <div class="mb-4">
+                <label for="existNoticeId" class="block text-sm font-semibold text-gray-700">번호</label>
+                <input type="text" id="existNoticeId" name="id" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" readonly>
+                <label for="existNoticeTitle" class="block text-sm font-semibold text-gray-700">제목</label>
+                <input type="text" id="existNoticeTitle" name="title" class="mt-1 px-4 py-2 w-full border border-grayㅈ-300 rounded-md focus:outline-none focus:border-blue-500" readonly>
+                <label for="existNoticeAuthor" class="block text-sm font-semibold text-gray-700">작성자</label>
+                <input type="text" id="existNoticeAuthor" name="author" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" readonly>
+                <label for="existNoticeContent" class="block text-sm font-semibold text-gray-700">내용</label>
+                <textarea id="existNoticeContent" name="content" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required></textarea>
+                <label for="updateNotice" class="block text-sm font-semibold text-gray-700"></label>
+                <button type="submit" id="updateNotice" class="mt-1 px-4 py-2 w-full bg-green-100 text-green-600 font-semibold rounded-md hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">수정</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="memberQnaListPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div class = "popup bg-white p-8 rounded-lg">
+            <h3 class = "text-center m-2 text-base md:text-xl font-semibold mb-2">
+                회원 Q&A 목록
+            </h3>
+            <table class="w-full border border-gray-300 text-center">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">번호</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">제목</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">작성일</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="px-4 py-2 bg-gray-100 border-t border-gray-300">
+                            <div class="flex justify-center items-center">
+                                <label for="qnaSearchType" class="mr-2"></label>
+                                <select name="searchType" id="qnaSearchType" class="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="NAME">제목</option>
+                                    <option value="CONTENT">내용</option>
+                                    <option value="AUTHOR">작성자</option>
+                                </select>
+                                <label for="qnaSearchKeyword" class="mr-2"></label>
+                                <input type="text" id="qnaSearchKeyword" name="searchKeyword" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                <button id="qnaSearch" onclick="changeMemberQnaListPopup()" class="bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out m-2">검색</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="memberQnaPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div class = "popup bg-white p-8 rounded-lg">
+            <h3 class = "text-center m-2 text-base md:text-xl font-semibold mb-2">
+                회원 Q&A 조회
+            </h3>
+            <table class="w-full border border-gray-300 text-center">
+                <thead>
+                <tr>
+                    <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">제목</th>
+                    <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">작성자</th>
+                    <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">작성일</th>
+                    <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">내용</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="memberOne2oneListPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <form class="popup bg-white p-8 rounded-lg">
+            <div class="mb-4">
+                <label for="memberId" class="block text-sm font-semibold text-gray-700">이름</label>
+                <input type="text" id="memberId" name="name" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <span id="nameCheckMessage" class="text-red-500"></span>
+            </div>
+            <div class="mb-4">
+                <label for="phone" class="block text-sm font-semibold text-gray-700">전화번호</label>
+                <input type="text" id="phone" name="phone" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <span id="phoneCheckMessage" class="text-red-500"></span>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-semibold text-gray-700">이메일</label>
+                <input type="email" id="email" name="email" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <span id="emailCheckMessage" class="text-red-500"></span>
+            </div>
+            <div class="mb-4">
+                <label for="address1" class="block text-sm font-semibold text-gray-700">주소</label>
+                <input type="text" id="address1" name="address1" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <span id="addressCheckMessage" class="text-red-500"></span>
+            </div>
+            <div class="mb-4">
+                <label for="address2" class="block text-sm font-semibold text-gray-700">상세 주소</label>
+                <input type="text" id="address2" name="address2" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <span id="address2CheckMessage" class="text-red-500"></span>
+            </div>
+            <div class="mb-4">
+                <label for="title" class="block text-sm font-semibold text-gray-700">제목</label>
+                <input type="text" id="title" name="title" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <span id="titleCheckMessage" class="text-red-500"></span>
+            </div>
+            <div class="mb-4">
+                <label for="content" class="block text-sm font-semibold text-gray-700">내용</label>
+                <textarea id="content" name="content" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required></textarea>
+                <span id="contentCheckMessage" class="text-red-500"></span>
+            </div>
+            <div class="mb-4">
+                <label for="date" class="block text-sm font-semibold text-gray-700">날짜</label>
+                <input type="date" id="date" name="date" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                <span id="dateCheckMessage" class="text-red-500"></span>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" id="memberOne2one" class="mt-4 bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">생성</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="memberNoticeListPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div class = "popup bg-white p-8 rounded-lg">
+            <h3 class = "text-center m-2 text-base md:text-xl font-semibold mb-2">
+                회원 공지사항 목록
+            </h3>
+            <table class="w-full border border-gray-300 text-center">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">번호</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">제목</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">작성일</th>
+                        <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="px-4 py-2 bg-gray-100 border-t border-gray-300">
+                            <div class="flex justify-center items-center">
+                                <label for="MemberNoticeSearchType" class="mr-2"></label>
+                                <select id="MemberNoticeSearchType" onchange="changeMemberNoticeListPopup()" class="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                                    <option value="NAME">제목</option>
+                                    <option value="CONTENT">내용</option>
+                                </select>
+                                <label for="MemberNoticeSearchKeyword" class="mr-2"></label>
+                                <input type="text" id="MemberNoticeSearchKeyword" oninput="changeMemberNoticeListPopup()" name="MemberNoticeSearchKeyword" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="memberPasswordForQnaPopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <form class="popup bg-white p-8 rounded-lg">
+            <h3 class="text-center m-2 text-base md:text-xl font-semibold mb-2">
+                비밀번호 확인
+            </h3>
+            <div class="mb-4">
+                <label for = "qnaId" class="block text-sm font-semibold text-gray-700"></label>
+                <input type="text" id="qnaId" name="id" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 hidden" readonly>
+                <label for="passwordForQna" class="block text-sm font-semibold text-gray-700">비밀번호</label>
+                <input type="password" id="passwordForQna" name="password" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" id="memberPasswordForQna" class="mt-4 bg-green-100 text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-200 hover:text-green-700 transition duration-300 ease-in-out">확인</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="memberNoticePopup" class="hidden fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div class = "popup bg-white p-8 rounded-lg">
+            <h3 class = "text-center m-2 text-base md:text-xl font-semibold mb-2">
+                회원 공지사항 조회
+            </h3>
+            <table class="w-full border border-gray-300 text-center">
+                <thead>
+                <tr>
+                    <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">제목</th>
+                    <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">작성자</th>
+                    <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">작성일</th>
+                    <th class="px-4 py-2 bg-gray-100 text-gray-600 border-b border-gray-300">내용</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script type="text/javascript">
+        // 회원 로그인
+        document.getElementById("memberLoginAjax").addEventListener("click", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("loginId").value;
+            const password = document.getElementById("loginPassword").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/login?memberId=" + id + "&memberPw=" + password);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        sessionStorage.setItem("login", "member");
+                        sessionStorage.setItem("token", response.accessToken);
+                        alert("로그인에 성공했습니다.");
+                        location.reload();
+                    } else if (xhr.status === 400) {
+                        const response = JSON.parse(xhr.responseText);
+                        alert(response.message);
+                    } else {
+                        alert("로그인에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        // 회원 로그아웃
+        document.getElementById("memberLogout").addEventListener("click", function(event) {
+            event.preventDefault();
+            sessionStorage.removeItem("login");
+            sessionStorage.removeItem("token");
+            location.reload();
+        });
+
+        // 관리자 로그인
+        document.getElementById("adminLoginAjax").addEventListener("click", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("id").value;
+            const password = document.getElementById("password").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/admin/login?memberId=" + id + "&memberPw=" + password);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        sessionStorage.setItem("login", "admin");
+                        sessionStorage.setItem("token", response.accessToken);
+                        alert("로그인에 성공했습니다.");
+                        location.reload();
+                    } else if (xhr.status === 400) {
+                        const response = JSON.parse(xhr.responseText);
+                        alert(response.message);
+                    } else {
+                        alert("로그인에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        // 관리자 로그아웃
+        document.getElementById("adminLogout").addEventListener("click", function(event) {
+            event.preventDefault();
+            sessionStorage.removeItem("login");
+            sessionStorage.removeItem("token");
+            location.reload();
+        });
+
+        // 페이지 로드 시 세션에서 로그인 정보를 확인하여 어떤 헤더를 보여줄지 결정
+        document.addEventListener("DOMContentLoaded", function() {
+            const admin = document.getElementById("admin");
+            const member = document.getElementById("member");
+            const logout = document.getElementById("logout");
+
+            if (sessionStorage.getItem("login") === "admin") {
+                admin.classList.remove("hidden");
+            } else if (sessionStorage.getItem("login") === "member") {
+                member.classList.remove("hidden");
+            } else {
+                sessionStorage.setItem("login", "logout");
+                logout.classList.remove("hidden");
+            }
+        });
+        
+        // 팝업 열기/닫기 함수 생성
+        function openMemberLoginPopup() {
+            closePop();
+            document.getElementById("memberLoginPopup").classList.remove("hidden");
+        }
+
+        function openAdminLoginPopup() {
+            closePop();
+            document.getElementById("adminLoginPopup").classList.remove("hidden");
+        }
+
+        function openMemberJoinPopup() {
+            closePop();
+            document.getElementById("memberJoinPopup").classList.remove("hidden");
+        }
+
+        function openIdPopup() {
+            closePop();
+            document.getElementById("forgotIdPopup").classList.remove("hidden");
+        }
+
+        function openPasswordPopup() {
+            closePop();
+            document.getElementById("forgotPasswordPopup").classList.remove("hidden");
+        }
+
+        function openMemberQnaListPopup() {
+            closePop();
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/qnas"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&searchType=" + document.getElementById("qnaSearchType").value
+                + "&searchContent=" + document.getElementById("qnaSearchKeyword").value);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const tbody = document.querySelector("#memberQnaListPopup tbody");
+                        tbody.innerHTML = "";
+                        for (let i = 0; i < response.length; i++) {
+                            const tr = document.createElement("tr");
+                            const number = document.createElement("td");
+                            number.textContent = i + 1;
+                            tr.appendChild(number);
+                            const title = document.createElement("td");
+                            title.textContent = response[i].qnaTitle;
+                            tr.appendChild(title);
+                            const date = document.createElement("td");
+                            date.textContent = response[i].qnaDate;
+                            tr.appendChild(date);
+                            const read = document.createElement("td");
+                            const readButton = document.createElement("button");
+                            readButton.textContent = "읽기";
+                            readButton.addEventListener("click", function() {
+                                qnaId = response[i].qnaId;
+                                closePop();
+                                openMemberPasswordForQnaPopup(response[i].qnaId);
+                            });
+                            read.appendChild(readButton);
+                            tr.appendChild(read);
+                            tbody.appendChild(tr);
+                        }
+
+                        document.getElementById("memberQnaListPopup").classList.remove("hidden");
+                    } else {
+                        alert("Q&A 목록을 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        function changeMemberQnaListPopup() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/qnas"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&searchType=" + document.getElementById("qnaSearchType").value
+                + "&searchContent=" + document.getElementById("qnaSearchKeyword").value);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const tbody = document.querySelector("#memberQnaListPopup tbody");
+                        tbody.innerHTML = "";
+                        for (let i = 0; i < response.length; i++) {
+                            const tr = document.createElement("tr");
+                            const number = document.createElement("td");
+                            number.textContent = i + 1;
+                            tr.appendChild(number);
+                            const title = document.createElement("td");
+                            title.textContent = response[i].qnaTitle;
+                            tr.appendChild(title);
+                            const date = document.createElement("td");
+                            date.textContent = response[i].qnaDate;
+                            tr.appendChild(date);
+                            const read = document.createElement("td");
+                            const readButton = document.createElement("button");
+                            readButton.textContent = "읽기";
+                            readButton.addEventListener("click", function() {
+                                qnaId = response[i].qnaId;
+                                closePop();
+                                openMemberPasswordForQnaPopup(response[i].qnaId);
+                            });
+                            read.appendChild(readButton);
+                            tr.appendChild(read);
+                            tbody.appendChild(tr);
+                        }
+                    } else {
+                        alert("Q&A 목록을 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        function openMemberOne2oneListPopup() {
+            closePop();
+            document.getElementById("memberOne2oneListPopup").classList.remove("hidden");
+        }
+
+        function openMemberNoticeListPopup() {
+            closePop();
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/notices"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&searchType=" + document.getElementById("MemberNoticeSearchType").value
+                + "&searchContent=" + document.getElementById("MemberNoticeSearchKeyword").value);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const tbody = document.querySelector("#memberNoticeListPopup tbody");
+                        tbody.innerHTML = "";
+                        for (let i = 0; i < response.length; i++) {
+                            const tr = document.createElement("tr");
+                            const number = document.createElement("td");
+                            number.textContent = i + 1;
+                            tr.appendChild(number);
+                            const title = document.createElement("td");
+                            title.textContent = response[i].noticeTitle;
+                            tr.appendChild(title);
+                            const date = document.createElement("td");
+                            date.textContent = response[i].noticeDate;
+                            tr.appendChild(date);
+                            const read = document.createElement("td");
+                            const readButton = document.createElement("button");
+                            readButton.textContent = "읽기";
+                            readButton.addEventListener("click", function() {
+                                noticeId = response[i].noticeId;
+                                openMemberNoticePopup(response[i].noticeId);
+                            });
+                            read.appendChild(readButton);
+                            tr.appendChild(read);
+                            tbody.appendChild(tr);
+
+                            document.getElementById("memberNoticeListPopup").classList.remove("hidden");
+                        }
+                    } else {
+                        alert("공지사항 목록을 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        function changeMemberNoticeListPopup() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/notices"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&searchType=" + document.getElementById("MemberNoticeSearchType").value
+                + "&searchContent=" + document.getElementById("MemberNoticeSearchKeyword").value);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const tbody = document.querySelector("#memberNoticeListPopup tbody");
+                        tbody.innerHTML = "";
+                        for (let i = 0; i < response.length; i++) {
+                            const tr = document.createElement("tr");
+                            const number = document.createElement("td");
+                            number.textContent = i + 1;
+                            tr.appendChild(number);
+                            const title = document.createElement("td");
+                            title.textContent = response[i].noticeTitle;
+                            tr.appendChild(title);
+                            const date = document.createElement("td");
+                            date.textContent = response[i].noticeDate;
+                            tr.appendChild(date);
+                            const read = document.createElement("td");
+                            const readButton = document.createElement("button");
+                            readButton.textContent = "읽기";
+                            readButton.addEventListener("click", function() {
+                                noticeId = response[i].noticeId;
+                                openMemberNoticePopup(response[i].noticeId);
+                            });
+                            read.appendChild(readButton);
+                            tr.appendChild(read);
+                            tbody.appendChild(tr);
+                        }
+                    } else {
+                        alert("공지사항 목록을 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        function openMemberNoticePopup(noticeId) {
+            closePop();
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/notice"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&noticeId=" + noticeId);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const tbody = document.querySelector("#memberNoticePopup tbody");
+                        tbody.innerHTML = "";
+                        const tr = document.createElement("tr");
+                        const title = document.createElement("td");
+                        title.textContent = response.noticeTitle;
+                        tr.appendChild(title);
+                        const author = document.createElement("td");
+                        author.textContent = response.noticeMemberId;
+                        tr.appendChild(author);
+                        const date = document.createElement("td");
+                        date.textContent = response.noticeDate;
+                        tr.appendChild(date);
+                        const content = document.createElement("td");
+                        content.textContent = response.noticeContent;
+                        tr.appendChild(content);
+                        tbody.appendChild(tr);
+
+                        document.getElementById("memberNoticePopup").classList.remove("hidden");
+                    } else {
+                        alert("공지사항을 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        function openAdminMemberListPopup() {
+            closePop();
+
+            const pxhr = new XMLHttpRequest();
+            pxhr.open("GET", "/v1/api/admin/users/number");
+            pxhr.send();
+            pxhr.onreadystatechange = function() {
+                if (pxhr.readyState === XMLHttpRequest.DONE) {
+                    if (pxhr.status === 200) {
+                        const response = JSON.parse(pxhr.responseText);
+                        const memberNumber = document.getElementById("memberCount");
+                        memberNumber.textContent = response.memberNumber;
+
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("GET", "/v1/api/admin/users"
+                            + "?accessToken=" + sessionStorage.getItem("token")
+                            + "&searchType=" + document.getElementById("MemberListSearchType").value
+                            + "&searchContent=" + document.getElementById("MemberListSearchKeyword").value
+                            + "&searchSort=" + document.getElementById("MemberListSearchSort").value
+                            + "&searchPageSize=" + document.getElementById("MemberListSearchNumber").value
+                            + "&searchPageNum=0");
+                        xhr.send();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === XMLHttpRequest.DONE) {
+                                if (xhr.status === 200) {
+                                    const response = JSON.parse(xhr.responseText);
+                                    const tbody = document.querySelector("#adminMemberListPopup tbody");
+                                    tbody.innerHTML = "";
+                                    for (let i = 0; i < response.length; i++) {
+                                        const tr = document.createElement("tr");
+                                        const number = document.createElement("td");
+                                        number.textContent = i + 1;
+                                        tr.appendChild(number);
+                                        const id = document.createElement("td");
+                                        id.textContent = response[i].memberId;
+                                        tr.appendChild(id);
+                                        const name = document.createElement("td");
+                                        name.textContent = response[i].memberName;
+                                        tr.appendChild(name);
+                                        const email = document.createElement("td");
+                                        email.textContent = response[i].memberEmail;
+                                        tr.appendChild(email);
+                                        const birth = document.createElement("td");
+                                        birth.textContent = response[i].memberBirthDate;
+                                        tr.appendChild(birth);
+                                        const joinDate = document.createElement("td");
+                                        joinDate.textContent = response[i].memberJoinDate;
+                                        tr.appendChild(joinDate);
+                                        tbody.appendChild(tr);
+                                    }
+
+                                    document.getElementById("adminMemberListPopup").classList.remove("hidden");
+                                } else {
+                                    alert("회원 목록을 불러오는데 실패했습니다.");
+                                }
+                            }
+                        };
+                    } else {
+                        alert("회원 수를 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        function changeAdminMemberListPopup() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/admin/users"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&searchType=" + document.getElementById("MemberListSearchType").value
+                + "&searchContent=" + document.getElementById("MemberListSearchKeyword").value
+                + "&searchSort=" + document.getElementById("MemberListSearchSort").value
+                + "&searchPageSize=" + document.getElementById("MemberListSearchNumber").value
+                + "&searchPageNum=0");
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const tbody = document.querySelector("#adminMemberListPopup tbody");
+                        tbody.innerHTML = "";
+                        for (let i = 0; i < response.length; i++) {
+                            const tr = document.createElement("tr");
+                            const number = document.createElement("td");
+                            number.textContent = i + 1;
+                            tr.appendChild(number);
+                            const id = document.createElement("td");
+                            id.textContent = response[i].memberId;
+                            tr.appendChild(id);
+                            const name = document.createElement("td");
+                            name.textContent = response[i].memberName;
+                            tr.appendChild(name);
+                            const email = document.createElement("td");
+                            email.textContent = response[i].memberEmail;
+                            tr.appendChild(email);
+                            const birth = document.createElement("td");
+                            birth.textContent = response[i].memberBirthDate;
+                            tr.appendChild(birth);
+                            const joinDate = document.createElement("td");
+                            joinDate.textContent = response[i].memberJoinDate;
+                            tr.appendChild(joinDate);
+                            tbody.appendChild(tr);
+                        }
+                    } else {
+                        alert("회원 목록을 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        function openAdminNoticeListPopup() {
+            closePop();
+
+            const pxhr = new XMLHttpRequest();
+            pxhr.open("GET", "/v1/api/admin/notices/number");
+            pxhr.send();
+            pxhr.onreadystatechange = function() {
+                if (pxhr.readyState === XMLHttpRequest.DONE) {
+                    if (pxhr.status === 200) {
+                        const response = JSON.parse(pxhr.responseText);
+                        const noticeNumber = document.getElementById("noticeCount");
+                        noticeNumber.textContent = response.noticeNumber;
+
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("GET", "/v1/api/admin/notices"
+                            + "?accessToken=" + sessionStorage.getItem("token")
+                            + "&searchType=" + document.getElementById("noticeSearchType").value
+                            + "&searchContent=" + document.getElementById("noticeSearchKeyword").value
+                            + "&searchSort=" + document.getElementById("noticeSearchSort").value
+                            + "&searchPageSize=" + document.getElementById("noticeSearchNumber").value
+                            + "&searchPageNumber=0");
+                        xhr.send();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === XMLHttpRequest.DONE) {
+                                if (xhr.status === 200) {
+                                    const response = JSON.parse(xhr.responseText);
+                                    const tbody = document.querySelector("#adminNoticeListPopup tbody");
+                                    tbody.innerHTML = "";
+                                    for (let i = 0; i < response.length; i++) {
+                                        const tr = document.createElement("tr");
+                                        const number = document.createElement("td");
+                                        number.textContent = i + 1;
+                                        tr.appendChild(number);
+                                        const title = document.createElement("td");
+                                        title.textContent = response[i].noticeTitle;
+                                        tr.appendChild(title);
+                                        const author = document.createElement("td");
+                                        author.textContent = response[i].noticeMemberId;
+                                        tr.appendChild(author);
+                                        const date = document.createElement("td");
+                                        date.textContent = response[i].noticeDate;
+                                        tr.appendChild(date);
+                                        const id = document.createElement("td");
+                                        id.textContent = response[i].noticeId;
+                                        id.classList.add("hidden");
+                                        tr.appendChild(id);
+                                        const content = document.createElement("td");
+                                        content.textContent = response[i].noticeContent;
+                                        content.classList.add("hidden");
+                                        tr.appendChild(content);
+                                        const update = document.createElement("td");
+                                        update.textContent = "수정";
+                                        update.classList.add("cursor-pointer", "text-green-500", "hover:underline");
+                                        update.addEventListener("click", function() {
+                                            closePop();
+                                            document.getElementById("existNoticeId").value = id.textContent;
+                                            document.getElementById("existNoticeTitle").value = title.textContent;
+                                            document.getElementById("existNoticeAuthor").value = author.textContent;
+                                            document.getElementById("existNoticeContent").value = content.textContent;
+                                            validateNotice();
+                                            document.getElementById("adminUpdateNoticePopup").classList.remove("hidden");
+                                        });
+                                        tr.appendChild(update);
+                                        tbody.appendChild(tr);
+                                    }
+
+                                    document.getElementById("adminNoticeListPopup").classList.remove("hidden");
+                                } else {
+                                    alert("공지사항 목록을 불러오는데 실패했습니다.");
+                                }
+                            }
+                        };
+                    } else {
+                        alert("공지사항 수를 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        function changeAdminNoticeListPopup() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/admin/notices"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&searchType=" + document.getElementById("noticeSearchType").value
+                + "&searchContent=" + document.getElementById("noticeSearchKeyword").value
+                + "&searchSort=" + document.getElementById("noticeSearchSort").value
+                + "&searchPageSize=" + document.getElementById("noticeSearchNumber").value
+                + "&searchPageNumber=0");
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        const tbody = document.querySelector("#adminNoticeListPopup tbody");
+                        tbody.innerHTML = "";
+                        for (let i = 0; i < response.length; i++) {
+                            const tr = document.createElement("tr");
+                            const number = document.createElement("td");
+                            number.textContent = i + 1;
+                            tr.appendChild(number);
+                            const title = document.createElement("td");
+                            title.textContent = response[i].noticeTitle;
+                            tr.appendChild(title);
+                            const author = document.createElement("td");
+                            author.textContent = response[i].noticeMemberId;
+                            tr.appendChild(author);
+                            const date = document.createElement("td");
+                            date.textContent = response[i].noticeDate;
+                            tr.appendChild(date);
+                            const id = document.createElement("td");
+                            id.textContent = response[i].noticeId;
+                            id.classList.add("hidden");
+                            tr.appendChild(id);
+                            const content = document.createElement("td");
+                            content.textContent = response[i].noticeContent;
+                            content.classList.add("hidden");
+                            tr.appendChild(content);
+                            const update = document.createElement("td");
+                            update.textContent = "수정";
+                            update.classList.add("cursor-pointer", "text-green-500", "hover:underline");
+                            update.addEventListener("click", function() {
+                                closePop();
+                                document.getElementById("existNoticeId").value = id.textContent;
+                                document.getElementById("existNoticeTitle").value = title.textContent;
+                                document.getElementById("existNoticeContent").value = content.textContent;
+                                document.getElementById("adminUpdateNoticePopup").classList.remove("hidden");
+                            });
+                            tr.appendChild(update);
+                            tbody.appendChild(tr);
+                        }
+                    } else {
+                        alert("공지사항 목록을 불러오는데 실패했습니다.");
+                    }
+                }
+            };
+        }
+
+        document.getElementById("memberPasswordForQna").addEventListener("click", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("qnaId").value;
+            const password = document.getElementById("passwordForQna").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/qna"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&qnaId=" + id
+                + "&memberPw=" + password);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        closePop();
+                        const response = JSON.parse(xhr.responseText);
+                        const tbody = document.querySelector("#memberQnaPopup tbody");
+                        tbody.innerHTML = "";
+                        const tr = document.createElement("tr");
+                        const title = document.createElement("td");
+                        title.textContent = response.qnaTitle;
+                        tr.appendChild(title);
+                        const author = document.createElement("td");
+                        author.textContent = response.qnaName;
+                        tr.appendChild(author);
+                        const date = document.createElement("td");
+                        date.textContent = response.qnaDate;
+                        tr.appendChild(date);
+                        const content = document.createElement("td");
+                        content.textContent = response.qnaContent;
+                        tr.appendChild(content);
+                        tbody.appendChild(tr);
+
+                        document.getElementById("memberQnaPopup").classList.remove("hidden");
+                    } else {
+                        const response = JSON.parse(xhr.responseText);
+                        alert(response.message);
+                    }
+                }
+            };
+        });
+
+        document.getElementById("createNotice").addEventListener("click", function(event) {
+            event.preventDefault();
+            const title = document.getElementById("noticeTitle").value;
+            const content = document.getElementById("noticeContent").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/admin/notice"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&noticeTitle=" + title
+                + "&noticeContent=" + content);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        alert("공지사항 생성에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        document.getElementById("updateNotice").addEventListener("click", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("existNoticeId").value;
+            const title = document.getElementById("existNoticeTitle").value;
+            const content = document.getElementById("existNoticeContent").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/admin/notice/update"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&noticeId=" + id
+                + "&noticeTitle=" + title
+                + "&noticeContent=" + content);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        alert("공지사항 수정에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        document.getElementById("memberOne2one").addEventListener("click", function(event) {
+            event.preventDefault();
+            const memberId = document.getElementById("memberId").value;
+            const phone = document.getElementById("phone").value;
+            const email = document.getElementById("email").value;
+            const address1 = document.getElementById("address1").value;
+            const address2 = document.getElementById("address2").value;
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
+            const date = document.getElementById("date").value;
+            const xhr = new XMLHttpRequest();
+
+            let errorMessage = "";
+
+            if (memberId.trim() === '') {
+                errorMessage += "아이디를 입력해주세요.\n";
+            }
+            if (phone.trim() === '') {
+                errorMessage += "전화번호를 입력해주세요.\n";
+            }
+            if (email.trim() === '') {
+                errorMessage += "이메일을 입력해주세요.\n";
+            }
+            if (address1.trim() === '') {
+                errorMessage += "주소를 입력해주세요.\n";
+            }
+            if (address2.trim() === '') {
+                errorMessage += "상세주소를 입력해주세요.\n";
+            }
+            if (title.trim() === '') {
+                errorMessage += "제목을 입력해주세요.\n";
+            }
+            if (content.trim() === '') {
+                errorMessage += "내용을 입력해주세요.\n";
+            }
+            if (date.trim() === '') {
+                errorMessage += "날짜를 입력해주세요.\n";
+            }
+
+            if (errorMessage !== "") {
+                alert(errorMessage);
+                return;
+            }
+
+            xhr.open("GET", "/v1/api/member/one2one"
+                + "?accessToken=" + sessionStorage.getItem("token")
+                + "&one2oneName=" + memberId
+                + "&one2oneEmail=" + email
+                + "&one2onePhone=" + phone
+                + "&one2oneAddress=" + address1 + "," + address2
+                + "&one2oneTitle=" + title
+                + "&one2oneContent=" + content
+                + "&one2oneDate=" + date);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        alert("1:1 문의 생성에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        document.getElementById("findId").addEventListener("click", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("findIdName").value;
+            const email = document.getElementById("findIdEmail").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/id"
+                + "?memberName=" + name
+                + "&memberEmail=" + email);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        alert("아이디는 " + response.memberId + "입니다.");
+                        closePop();
+                    } else {
+                        alert("아이디 찾기에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        document.getElementById("findPassword").addEventListener("click", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("findPasswordId").value;
+            const name = document.getElementById("findPasswordName").value;
+            const email = document.getElementById("findPasswordEmail").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/pw"
+                + "?memberId=" + id
+                + "&memberName=" + name
+                + "&memberEmail=" + email);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        alert("비밀번호는 " + response.memberPw + "입니다.");
+                        closePop();
+                    } else {
+                        alert("비밀번호 찾기에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        document.getElementById("memberJoinAjax").addEventListener("click", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("memberJoinId").value;
+            const password = document.getElementById("memberJoinPassword").value;
+            const passwordConfirm = document.getElementById("memberPwConfirm").value;
+            const memberName = document.getElementById("memberName").value;
+            const email = document.getElementById("memberEmail").value;
+            const emailReceive = document.getElementById("memberEmailReceive").value;
+            const passwordQuestion = document.getElementById("memberQuestion").value;
+            const passwordAnswer = document.getElementById("memberAnswer").value;
+            const memberGender = document.getElementById("memberGender").value;
+            const birth = document.getElementById("memberBirth").value.toString();
+
+            let errorMessage = "";
+
+            if (id.length === 0) {
+                errorMessage += "아이디를 입력해주세요.\n";
+            }
+            if (id.length < 4) {
+                errorMessage += "아이디는 4자리 이상으로 입력해주세요.\n";
+            }
+            if (id.length > 16) {
+                errorMessage += "아이디는 16자리 이하로 입력해주세요.\n";
+            }
+            if (!/^[a-z0-9]+$/.test(id)) {
+                errorMessage += "아이디는 영문 소문자와 숫자로만 입력해주세요.\n";
+            }
+
+            if (password.length === 0) {
+                errorMessage += "비밀번호를 입력해주세요.\n";
+            }
+            if (password.length < 8) {
+                errorMessage += "비밀번호는 8자리 이상으로 입력해주세요.\n";
+            }
+            if (password.length > 16) {
+                errorMessage += "비밀번호는 16자리 이하로 입력해주세요.\n";
+            }
+            if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]+$/.test(password)) {
+                errorMessage += "비밀번호는 영문으로 시작하고, 영문 대소문자, 숫자, 특수문자(!@#$%^&*) 조합으로 입력해주세요.\n";
+            }
+
+            if (passwordConfirm.length === 0) {
+                errorMessage += "비밀번호 확인을 입력해주세요.\n";
+            }
+            if (password !== passwordConfirm) {
+                errorMessage += "비밀번호가 일치하지 않습니다.\n";
+            }
+
+            if (memberName.trim() === '') {
+                errorMessage += "이름을 입력해주세요.\n";
+            }
+
+            if (email.trim() === '') {
+                errorMessage += "이메일을 입력해주세요.\n";
+            }
+
+            if (passwordAnswer.trim() === '') {
+                errorMessage += "답변을 입력해주세요.\n";
+            }
+
+            if (birth.trim() === '') {
+                errorMessage += "생년월일을 입력해주세요.\n";
+            }
+
+            if (errorMessage !== "") {
+                alert(errorMessage);
+                return false;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/join"
+                + "?memberId=" + id
+                + "&memberPw=" + password
+                + "&memberPwConfirm=" + passwordConfirm
+                + "&memberName=" + memberName
+                + "&memberEmail=" + email
+                + "&memberEmailReceive=" + emailReceive
+                + "&memberPwQuestion=" + passwordQuestion
+                + "&memberPwAnswer=" + passwordAnswer
+                + "&memberGender=" + memberGender
+                + "&memberBirthDate=" + birth);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert("회원가입에 성공했습니다.");
+                        closePop();
+                    } else {
+                        alert("회원가입에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        function openAdminCreateNoticePopup() {
+            closePop();
+            document.getElementById("adminCreateNoticePopup").classList.remove("hidden");
+        }
+
+        function openMemberPasswordForQnaPopup(qnaId) {
+            closePop();
+            document.getElementById("qnaId").value = qnaId;
+            document.getElementById("memberPasswordForQnaPopup").classList.remove("hidden");
+        }
+
+        function requiredLogin() {
+            alert("로그인이 필요한 서비스입니다.");
+            closePop();
+            openMemberLoginPopup();
+        }
+
+        function validate() {
+            checkUsername();
+            checkPassword();
+            checkPasswordConfirm();
+            checkName();
+            checkEmail();
+            checkAnswer();
+            checkBirth();
+        }
+
+        document.getElementById("idCheckAjax").addEventListener("click", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("memberJoinId").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/v1/api/member/idChk?id=" + id);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert("사용 가능한 아이디입니다.");
+                    } else if (xhr.status === 400) {
+                        const response = JSON.parse(xhr.responseText);
+                        alert(response.message);
+                    } else {
+                        alert("아이디 중복 확인에 실패했습니다.");
+                    }
+                }
+            };
+        });
+
+        function checkUsername() {
+            const username = document.getElementById('memberJoinId').value;
+            const message = document.getElementById('idCheck');
+
+            message.innerHTML = '';
+            if (username.length === 0) message.innerHTML += '<br>아이디를 입력해주세요.';
+            if (username.length < 4) message.innerHTML += '<br>아이디는 4자리 이상으로 입력해주세요.';
+            if (username.length > 16) message.innerHTML += '<br>아이디는 16자리 이하로 입력해주세요.';
+            if (!/^[a-z0-9]+$/.test(username)) message.innerHTML += '<br>아이디는 영문 소문자와 숫자로만 입력해주세요.';
+            if (message.innerHTML.startsWith('<br>')) message.innerHTML = message.innerHTML.substring(4);
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('memberJoinPassword').value;
+            const message = document.getElementById('passwordCheck');
+
+            message.innerHTML = '';
+            if (password.length === 0) message.innerHTML += '<br>비밀번호를 입력해주세요.';
+            if (password.length < 8) message.innerHTML += '<br>비밀번호는 8자리 이상으로 입력해주세요.';
+            if (password.length > 16) message.innerHTML += '<br>비밀번호는 16자리 이하로 입력해주세요.';
+            if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]+$/.test(password)) message.innerHTML += '<br>비밀번호는 영문으로 시작하고, 영문 대소문자, 숫자, 특수문자(!@#$%^&*)로만 입력해주세요.';
+            if (message.innerHTML.startsWith('<br>')) message.innerHTML = message.innerHTML.substring(4);
+        }
+
+        function checkPasswordConfirm() {
+            const password = document.getElementById('memberJoinPassword').value;
+            const passwordConfirm = document.getElementById('memberPwConfirm').value;
+            const message = document.getElementById('passwordConfirmCheck');
+
+            message.innerHTML = '';
+            if (passwordConfirm.length === 0) message.innerHTML += '<br>비밀번호 확인을 입력해주세요.';
+            if (password !== passwordConfirm) message.innerHTML += '<br>비밀번호가 일치하지 않습니다.';
+            if (message.innerHTML.startsWith('<br>')) message.innerHTML = message.innerHTML.substring(4);
+        }
+
+        function checkName() {
+            const name = document.getElementById('memberName').value;
+            const message = document.getElementById('nameCheck');
+
+            message.innerHTML = '';
+            if (name.trim() === '') message.innerHTML += '이름을 입력해주세요.';
+        }
+
+        function checkEmail() {
+            const email = document.getElementById('memberEmail').value;
+            const message = document.getElementById('emailCheck');
+
+            message.innerHTML = '';
+            if (email.trim() === '') message.innerHTML += '이메일을 입력해주세요.';
+        }
+
+        function checkAnswer() {
+            const answer = document.getElementById('memberAnswer').value;
+            const message = document.getElementById('answerCheck');
+
+            message.innerHTML = '';
+            if (answer.trim() === '') message.innerHTML += '답변을 입력해주세요.';
+        }
+
+        function checkBirth() {
+            const birth = document.getElementById('memberBirth').value;
+            const message = document.getElementById('birthCheck');
+
+            message.innerHTML = '';
+            if (birth.trim() === '') message.innerHTML += '생년월일을 입력해주세요.';
+        }
+
+        function checkOne2OneName() {
+            const name = document.getElementById('memberId').value;
+            const message = document.getElementById('nameCheckMessage');
+
+            message.innerHTML = '';
+            if (name.trim() === '') message.innerHTML = '이름을 입력해주세요.';
+        }
+
+        function checkOne2OnePhone() {
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('phoneCheckMessage');
+
+            message.innerHTML = '';
+            if (phone.trim() === '') message.innerHTML = '전화번호를 입력해주세요.';
+        }
+
+        function checkOne2OneEmail() {
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('emailCheckMessage');
+
+            message.innerHTML = '';
+            if (email.trim() === '') message.innerHTML = '이메일을 입력해주세요.';
+        }
+
+        function checkOne2OneAddress() {
+            const address1 = document.getElementById('address1').value;
+            const message1 = document.getElementById('addressCheckMessage');
+            const address2 = document.getElementById('address2').value;
+            const message2 = document.getElementById('address2CheckMessage');
+
+            message1.innerHTML = '';
+            message2.innerHTML = '';
+            if (address1.trim() === '') message1.innerHTML = '주소를 입력해주세요.';
+            if (address2.trim() === '') message2.innerHTML = '상세 주소를 입력해주세요.';
+        }
+
+        function checkOne2OneTitle() {
+            const title = document.getElementById('title').value;
+            const message = document.getElementById('titleCheckMessage');
+
+            message.innerHTML = '';
+            if (title.trim() === '') message.innerHTML = '제목을 입력해주세요.';
+        }
+
+        function checkOne2OneContent() {
+            const content = document.getElementById('content').value;
+            const message = document.getElementById('contentCheckMessage');
+
+            message.innerHTML = '';
+            if (content.trim() === '') message.innerHTML = '내용을 입력해주세요.';
+        }
+
+        function checkOne2OneDate() {
+            const date = document.getElementById('date').value;
+            const message = document.getElementById('dateCheckMessage');
+
+            message.innerHTML = '';
+            if (date.trim() === '') message.innerHTML = '날짜를 입력해주세요.';
+        }
+
+        function validateNotice(){
+            checkNoticeTitle();
+            checkNoticeContent();
+        }
+
+        function checkNoticeTitle(){
+            const title = document.getElementById('noticeTitle').value;
+            const message = document.getElementById('noticeTitleCheckMessage');
+
+            message.innerHTML = '';
+            if (title.trim() === '') message.innerHTML = '제목을 입력해주세요.';
+        }
+
+        function checkNoticeContent(){
+            const content = document.getElementById('noticeContent').value;
+            const message = document.getElementById('noticeContentCheckMessage');
+
+            message.innerHTML = '';
+            if (content.trim() === '') message.innerHTML = '내용을 입력해주세요.';
+        }
+
+        function closePop() {
+            document.getElementById("memberLoginPopup").classList.add("hidden");
+            document.getElementById("memberJoinPopup").classList.add("hidden");
+            document.getElementById("adminLoginPopup").classList.add("hidden");
+            document.getElementById("forgotIdPopup").classList.add("hidden");
+            document.getElementById("forgotPasswordPopup").classList.add("hidden");
+            document.getElementById("memberQnaListPopup").classList.add("hidden");
+            document.getElementById("memberOne2oneListPopup").classList.add("hidden");
+            document.getElementById("memberNoticeListPopup").classList.add("hidden");
+            document.getElementById("adminMemberListPopup").classList.add("hidden");
+            document.getElementById("adminNoticeListPopup").classList.add("hidden");
+            document.getElementById("adminCreateNoticePopup").classList.add("hidden");
+            document.getElementById("adminUpdateNoticePopup").classList.add("hidden");
+            document.getElementById("memberPasswordForQnaPopup").classList.add("hidden");
+            document.getElementById("memberQnaPopup").classList.add("hidden");
+            document.getElementById("memberNoticePopup").classList.add("hidden");
+        }
+
+        // 트리거 클릭 시 팝업을 열 이벤트 리스너 생성
+        document.getElementById("memberLogin").addEventListener("click", function(event) {
+            event.preventDefault();
+            openMemberLoginPopup();
+        });
+
+        document.getElementById("adminLogin").addEventListener("click", function(event) {
+            event.preventDefault();
+            openAdminLoginPopup();
+        });
+
+        document.getElementById("memberJoin").addEventListener("click", function(event) {
+            event.preventDefault();
+            validate();
+            openMemberJoinPopup();
+        });
+
+        document.getElementById("forgotIdLink").addEventListener("click", function(event) {
+            event.preventDefault();
+            openIdPopup();
+        });
+
+        document.getElementById("forgotPasswordLink").addEventListener("click", function(event) {
+            event.preventDefault();
+            openPasswordPopup();
+        });
+
+        document.getElementById("adminMemberList").addEventListener("click", function(event) {
+            event.preventDefault();
+            openAdminMemberListPopup();
+        });
+
+        document.getElementById("adminNoticeList").addEventListener("click", function(event) {
+            event.preventDefault();
+            openAdminNoticeListPopup();
+        });
+
+        document.getElementById("memberQnaList").addEventListener("click", function(event) {
+            event.preventDefault();
+            openMemberQnaListPopup();
+        });
+
+        document.getElementById("memberOne2oneList").addEventListener("click", function(event) {
+            event.preventDefault();
+            openMemberOne2oneListPopup();
+        });
+
+        document.getElementById("memberNoticeList").addEventListener("click", function(event) {
+            event.preventDefault();
+            openMemberNoticeListPopup();
+        });
+
+        document.getElementById("adminCreateNotice").addEventListener("click", function(event) {
+            event.preventDefault();
+            validateNotice();
+            openAdminCreateNoticePopup();
+        });
+
+        // 배경 클릭 시 팝업을 닫을 이벤트 리스너 생성
+        document.getElementById("memberLoginPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("memberJoinPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("adminLoginPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("forgotIdPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("forgotPasswordPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("adminMemberListPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("adminNoticeListPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("memberQnaListPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("memberOne2oneListPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("memberNoticeListPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("adminCreateNoticePopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("adminUpdateNoticePopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("memberPasswordForQnaPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("memberQnaPopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("memberNoticePopup").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+
+        $(document).ready(function(){
+            $('.carousel').slick({
+                autoplay: true,
+                autoplaySpeed: 5000,
+                dots: true,
+                arrows: false,
+            });
+        });
+    </script>
+</body>
+
+</html>
