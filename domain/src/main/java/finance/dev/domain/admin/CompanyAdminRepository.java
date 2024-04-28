@@ -6,4 +6,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @TypeInfo(name = "CompanyAdminRepository", description = "회사 관리자 레포지토리 인터페이스")
 @EnableJpaRepositories
-public interface CompanyAdminRepository extends JpaRepository<CompanyAdminEntity, Long> {}
+public interface CompanyAdminRepository extends JpaRepository<CompanyAdminEntity, Long> {
+    CompanyAdminEntity findByMemberId(String memberId);
+
+    boolean existsByMemberId(String memberId);
+}
